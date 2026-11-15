@@ -55,6 +55,20 @@
   `;
   const LOGO = `<svg width="18" height="18" viewBox="0 0 24 24"><rect width="24" height="24" rx="5.3" fill="#2f5bff"/><line x1="14.9" y1="14.9" x2="19.2" y2="19.2" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/><circle cx="10.3" cy="10.3" r="5.6" fill="#ffe066" stroke="#fff" stroke-width="1.7"/><line x1="7.8" y1="10.3" x2="12.8" y2="10.3" stroke="#2f5bff" stroke-width="1.3" stroke-linecap="round"/></svg>`;
 
+  // the logo is built with DOM calls, not innerHTML, so pages that enforce Trusted Types cannot block it
+  const SVGNS = "http://www.w3.org/2000/svg";
+  const svg = (tag, attrs) => { const n = document.createElementNS(SVGNS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); return n; };
+  const logoEl = () => {
+    const s = svg("svg", { width: 18, height: 18, viewBox: "0 0 24 24" });
+    s.append(
+      svg("rect", { width: 24, height: 24, rx: 5.3, fill: "#2f5bff" }),
+      svg("line", { x1: 14.9, y1: 14.9, x2: 19.2, y2: 19.2, stroke: "#fff", "stroke-width": 2.4, "stroke-linecap": "round" }),
+      svg("circle", { cx: 10.3, cy: 10.3, r: 5.6, fill: "#ffe066", stroke: "#fff", "stroke-width": 1.7 }),
+      svg("line", { x1: 7.8, y1: 10.3, x2: 12.8, y2: 10.3, stroke: "#2f5bff", "stroke-width": 1.3, "stroke-linecap": "round" }),
+    );
+    return s;
+  };
+
   const host = document.createElement("div");
   host.id = "source-hunter-root";
   host.style.cssText = "all:initial;position:fixed;top:0;left:0;width:0;height:0;z-index:2147483647;";
@@ -91,10 +105,18 @@
   }
 
   function showCard(rect, text) {
+    try { showCardInner(rect, text); } catch (e) {
+      // never fail silently on a page we do not control: fall back to the popup window
+      console.warn("[Source Hunter] inline card failed:", e);
+      try { chrome.runtime.sendMessage({ trace: text }); } catch { /* extension reloaded */ }
+    }
+  }
+
+  function showCardInner(rect, text) {
     closeCard(); hidePill();
     card = h("div", "card");
     const hd = h("div", "hd");
-    const logo = h("span"); logo.innerHTML = LOGO; // static trusted markup
+    const logo = h("span"); logo.appendChild(logoEl());
     const x = h("button", "x", "✕"); x.onclick = closeCard;
     hd.append(logo, h("b", "", "Source Hunter"), x);
     const claim = h("div", "claim", `“${text}”`);
@@ -103,6 +125,7 @@
     const bar = h("div", "bar"); bar.appendChild(h("i"));
     load.append(hint, bar);
     card.append(hd, claim, load);
+    if (!host.isConnected) document.documentElement.appendChild(host); // the page may have removed our host element
     root.appendChild(card);
     place(card, rect, 348, 190);
     const hints = ["Searching for pages that repeat this…", "Reading the pages…", "Following the sources they cite…", "Comparing the wording…"];
@@ -218,7 +241,7 @@
       if (text.length < 12 || !sel.rangeCount) return;
       const rect = sel.getRangeAt(0).getBoundingClientRect();
       pill = h("button", "pill");
-      const l = h("span"); l.innerHTML = LOGO;
+      const l = h("span"); l.appendChild(logoEl());
       pill.append(l, h("span", "", "Trace it"));
       pill.style.left = Math.min(rect.right, innerWidth - 120) + "px";
       pill.style.top = Math.max(rect.top - 40, 6) + "px";
