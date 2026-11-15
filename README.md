@@ -41,7 +41,21 @@ Highlight a number, claim or quote on any page and see where it really came from
 
 ## Measured results
 
-RESULTS_PLACEHOLDER
+`node scripts/eval.mjs`: 20 claims with a known answer, each traced live and fresh. One trace yields both the rule-based verdict and the Haiku-judged verdict, so the comparison is like for like.
+
+| | Rule-based only | With Claude Haiku |
+|---|---|---|
+| **Verdict accuracy** (20 claims) | 18/20 = 90% | **19/20 = 95%** |
+| False alarms on **true** claims (4) | 0/4 | **0/4** |
+| High-confidence answers correct | n/a | **5/5** |
+| Cost | $0 | **$0.0066 for all 20 traces** ($0.00033 each) |
+| Average time per trace | | 26 s |
+
+The set: 11 myths ("10% of the brain", "Great Wall from space", "bats are blind"…), 3 misattributed quotes (Einstein "insanity", Marie Antoinette "let them eat cake", Gandhi "be the change"), 4 true claims ("Earth is 4.5 billion years old", "water boils at 100 °C"…) to catch false alarms, and 2 murky statistics ("95% of startups fail", "10,000 steps a day") where "supported as stated" would be wrong.
+
+- **The one miss** was the Gandhi quote: that run returned nothing usable (a transient network error plus search variance). Re-run on its own it is judged *Misattributed* correctly. The table above keeps the original measured run.
+- **Haiku's gain** (+5 points) is mostly on quotes and true claims, where word-counting says "origin unclear" and reading the page says *supported* or *misattributed*.
+- It is a 20-claim set, mostly well-known myths. Treat the percentages as a sanity check, not a benchmark; the script is in the repo so you can add your own claims.
 
 ## Run it yourself
 

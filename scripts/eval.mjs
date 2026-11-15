@@ -33,17 +33,19 @@ const SET = [
 ];
 
 const map = (v, base) => (v.kind === "disputed" ? "false" : v.kind === "supported" || (base && (v.kind === "verbatim" || v.kind === "match")) ? "supported" : "unclear");
-const rows = [];
-let usd = 0, ms = 0;
+// resume: `node scripts/eval.mjs 14` keeps the first 14 saved rows and re-runs the rest
+const START = Number(process.argv[2] || 0);
+const rows = START ? JSON.parse(fs.readFileSync(new URL("./eval-results.json", import.meta.url), "utf8")).rows.slice(0, START) : [];
+let usd = rows.reduce((a, r) => a + (r.usd || 0), 0), ms = rows.reduce((a, r) => a + (r.sec || 0) * 1000, 0);
 
-for (const [claim, kind, ok] of SET) {
+for (const [claim, kind, ok] of SET.slice(START)) {
   const t = Date.now();
   let d;
   try {
     const r = await fetch(`${APP}/api/trace`, { method: "POST", body: JSON.stringify({ claim, fresh: true }) });
     d = (await r.text()).trim().split("\n").map((l) => JSON.parse(l)).find((m) => m.type === "done");
   } catch (e) { console.log("ERR", claim, e.message); }
-  if (!d) { rows.push({ claim, kind, error: true }); continue; }
+  if (!d) { console.log("NO RESULT for", claim); rows.push({ claim, kind, error: true }); continue; }
   const hk = map(d.verdict, false), bs = map((d.baseline ?? d).verdict, true);
   const o = d.sources.find((s) => s.url === d.origin);
   usd += d.judge?.usd ?? 0; ms += Date.now() - t;

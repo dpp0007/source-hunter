@@ -11,11 +11,14 @@ export async function search(query: string, extra: Record<string, string> = {}):
   const u = new URL("https://api.search.tinyfish.ai");
   u.searchParams.set("query", query);
   for (const [k, v] of Object.entries(extra)) u.searchParams.set(k, v);
-  let r = await fetch(u, { headers: H() });
-  // free tier is 30 req/min: back off and retry rather than failing the whole trace
-  for (let i = 0; i < 3 && r.status === 429; i++) {
-    await new Promise((ok) => setTimeout(ok, (Number(r.headers.get("retry-after")) || 8) * 1000));
-    r = await fetch(u, { headers: H() });
+  // every call has a hard timeout so one slow upstream cannot eat the whole request budget (Vercel gives us 60s)
+  const once = () => fetch(u, { headers: H(), signal: AbortSignal.timeout(12_000) });
+  const go = async () => { try { return await once(); } catch (e) { if (/abort|timeout/i.test(String(e))) return once(); throw e; } }; // one retry on a timeout
+  let r = await go();
+  // free tier is 30 req/min: back off briefly and retry rather than failing the whole trace
+  for (let i = 0; i < 2 && r.status === 429; i++) {
+    await new Promise((ok) => setTimeout(ok, Math.min(Number(r.headers.get("retry-after")) || 4, 5) * 1000));
+    r = await go();
   }
   if (!r.ok) throw new Error(`TinyFish Search ${r.status}: ${(await r.text()).slice(0, 200)}`);
   return ((await r.json()).results ?? []) as SearchHit[];
@@ -32,7 +35,7 @@ export async function fetchPages(urls: string[]): Promise<Page[]> {
   const list = [...back.keys()].slice(0, 10);
   if (!list.length) return [];
   const post = async (batch: string[]): Promise<Page[]> => {
-    const r = await fetch("https://api.fetch.tinyfish.ai", { method: "POST", headers: H(), body: JSON.stringify({ urls: batch, format: "markdown" }) });
+    const r = await fetch("https://api.fetch.tinyfish.ai", { method: "POST", headers: H(), body: JSON.stringify({ urls: batch, format: "markdown" }), signal: AbortSignal.timeout(22_000) });
     if (!r.ok) throw Object.assign(new Error(`TinyFish Fetch ${r.status}: ${(await r.text()).slice(0, 200)}`), { status: r.status });
     return (await r.json()).results ?? [];
   };

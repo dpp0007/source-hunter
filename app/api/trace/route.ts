@@ -17,7 +17,8 @@ type Verdict = { kind: string; title: string; detail: string };
 type Conf = { level: string; why: string };
 
 const MAX_HOPS = 3;
-const SOFT_DEADLINE = 30_000; // after this, stop following citations and answer with what we have
+const SOFT_DEADLINE = 28_000; // after this, stop following citations and answer with what we have
+const JUDGE_DEADLINE = 46_000; // after this there is no time left for the AI judge: answer with the rule-based judgement
 // where primary sources live: used to make TinyFish Search return studies, filings and datasets, not just popular copies
 const PRIMARY = "nih.gov,ncbi.nlm.nih.gov,cdc.gov,nasa.gov,noaa.gov,census.gov,bls.gov,sec.gov,who.int,arxiv.org,nber.org,ssrn.com,nature.com,science.org,jamanetwork.com,nejm.org,pnas.org,thelancet.com,oecd.org,worldbank.org,un.org,europa.eu,harvard.edu,mit.edu,stanford.edu";
 const JUNK_SITE = /crossword|wordle|scrabble|word ?finder|quizlet|jeopardy|trivia ?answers|lyrics|clue[s]?\b/i;
@@ -207,7 +208,7 @@ export async function POST(req: Request) {
         let judgeInfo: Record<string, unknown> = { used: false, reason: useJudge ? "no pages to judge" : "AI judging is off" };
 
         // Claude Haiku reads what TinyFish fetched: one batched call, at most 8 short excerpts
-        if (useJudge && sources.length) {
+        if (useJudge && sources.length && Date.now() - T0 < JUDGE_DEADLINE) {
           send({ type: "step", msg: "Judging each page: does it state, mention or debunk the claim?" });
           const cands = sources.map((s, i) => ({ s, id: i + 1 })).sort((x, y) => +y.s.primary - +x.s.primary || y.s.score - x.s.score).slice(0, 8);
           const ins: JudgeInput[] = cands.map(({ s, id }) => ({ id, host: s.host.replace(/^www\./, ""), title: s.title, date: s.date, primary: s.primary, excerpt: s.ctx ?? s.passage }));
