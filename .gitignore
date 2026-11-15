@@ -1,0 +1,11 @@
+node_modules
+.next
+.next-build
+.env
+.env.local
+*.tsbuildinfo
+.vercel
+scripts/eval-results.json
+
+.vercel
+.env*

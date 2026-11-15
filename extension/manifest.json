@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "name": "Source Hunter",
+  "version": "2.0.0",
+  "description": "Highlight a claim, click once, and see where it really came from. Claim Radar flags the checkable claims on any page.",
+  "icons": { "16": "icons/icon16.png", "32": "icons/icon32.png", "48": "icons/icon48.png", "128": "icons/icon128.png" },
+  "permissions": ["contextMenus", "activeTab", "scripting"],
+  "host_permissions": ["http://localhost:3001/*"],
+  "background": { "service_worker": "background.js" },
+  "action": {
+    "default_title": "Source Hunter: trace the highlighted text, or scan this page for claims",
+    "default_icon": { "16": "icons/icon16.png", "32": "icons/icon32.png", "48": "icons/icon48.png", "128": "icons/icon128.png" }
+  },
+  "content_scripts": [{ "matches": ["http://*/*", "https://*/*"], "js": ["claims.js", "content.js"] }]
+}
