@@ -6,7 +6,7 @@ const dir = new URL("../extension/", import.meta.url);
 const opened = [], sent = [];
 let onMsg, onClick, onMenu, menus = [];
 globalThis.self = globalThis;
-globalThis.importScripts = (f) => (0, eval)(fs.readFileSync(new URL(f, dir), "utf8"));
+globalThis.importScripts = (f) => { (0, eval)(fs.readFileSync(new URL(f, dir), "utf8")); if (process.env.APP && f === "config.js") self.APP = process.env.APP; }; // APP=https://... tests against a deployment
 globalThis.chrome = {
   windows: { create: (o) => opened.push(o) },
   runtime: { onInstalled: { addListener: (f) => f() }, onMessage: { addListener: (f) => (onMsg = f) } },
