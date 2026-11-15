@@ -7,6 +7,7 @@ Highlight a number, claim or quote on any page and see where it really came from
 
 ## Try it in 60 seconds (judges)
 
+0. **Fastest look:** open **/showcase**, nine real traces captured from the live app (verdicts, trails, TinyResearch findings), nothing to run.
 1. Open the site. Click **▶ Einstein “insanity” quote** under *Finished deep traces*: a real TinyResearch run (4 min, 27 sources) opens instantly at no cost. See the verdict, the origin, the verified chain, the drift diff.
 2. Click a claim chip (e.g. *Humans use only 10% of their brains*). A fast trace takes 15 to 35 seconds.
 3. Install the extension: **Download the extension (.zip)** at the bottom of the page → unzip → `chrome://extensions` → Developer mode → **Load unpacked**.
@@ -18,6 +19,9 @@ Highlight a number, claim or quote on any page and see where it really came from
 |---|---|
 | **Highlight → inline verdict** | Select text, click *Trace it*. A card opens beside the text: verdict, earliest match, confidence, *Copy safe quote*. |
 | **Claim Radar** | Toolbar icon with nothing selected: numbered badges on the page's statistics, quotes, "according to…" claims and sayings pinned on a person. |
+| **Trail in the card** | The one-click card shows the dated trail, oldest first: each step's source, exact wording, whether it states / mentions / debunks the claim, and ⚑ flags where the wording changed. |
+| **Instant deep answers** | For claims already investigated by TinyResearch (the demo set), the card and app attach the finished deep result immediately: verdict, origin, "how it changed". No 4-minute wait, no spend. |
+| **Showcase** | `/showcase`: real captured traces for 9 claims, with each citation chain. Rebuild it with `node scripts/make-showcase.mjs`. |
 | **Full trace** | One verdict card, then tabs: Chain (every TinyResearch citation re-checked on its live page), Pages (who repeats it, with a word-level diff vs the earliest wording), Drift, Report. |
 | **Article Audit** | Paste an article URL: TinyFish Fetch reads it and lists the claims worth checking. |
 | **Safe to quote** | Original wording + source + link, ready to paste. Also *Copy citation* and *Download JSON*. |
@@ -27,9 +31,11 @@ Highlight a number, claim or quote on any page and see where it really came from
 | Product | Used for |
 |---|---|
 | **Search** | 5 calls per trace (the claim, origin-hunting, original study, `research_paper`, `include_domains` = primary-source sites) + one per *named* source found in a passage, up to 3 hops upstream. |
-| **Fetch** | Reads every candidate page; re-checks every quote TinyResearch cites on its live page; reads articles for Article Audit. Bad URLs are normalised; a rejected batch is retried one by one. |
+| **Fetch** | Reads every candidate page (one slow page cannot sink the batch: on a timeout each URL is retried on its own); re-checks every quote TinyResearch cites on its live page; reads articles for Article Audit. Bad URLs are normalised; a rejected batch is retried one by one. |
 | **TinyResearch** | The deep pass: asked for a cited chain **and** a JSON verdict. Live progress (round, sources read) while it works. Button on the public site (each run is ~$2); same claim reuses a run. |
 | **Agent** | A real browser for pages Fetch cannot read (cookie walls, bot checks). Opt-in per check. |
+
+**Upstream walk.** When a page credits its source ("according to Harvard's Shikhar Ghosh"), one tiny Haiku call names the credited source and a search query; TinyFish Search and Fetch then read that source's own page (up to 2 steps, only while the trace is still fast). The credited name must appear in the page excerpt, so it cannot be invented.
 
 **Claude Haiku (`claude-haiku-5-5`)** is the judge, not the researcher: it only reads text TinyFish already fetched and decides, per page, *states / mentions / debunks / unrelated*, and which page is the origin. It cannot invent evidence: every quote it cites must appear in the page excerpt we sent, or the judgement is downgraded. If the key is missing, over its daily cap, or the call fails, the rule-based judgement is used.
 

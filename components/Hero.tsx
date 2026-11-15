@@ -37,6 +37,7 @@ export default function Hero() {
       <div className="mt-6 flex flex-wrap gap-3">
         <a href="#trace" className="rounded-full bg-ink px-5 py-3 text-sm font-medium text-paper transition hover:-translate-y-0.5">Trace a claim</a>
         <a href="#extension" className="rounded-full border border-line px-5 py-3 text-sm font-medium transition hover:bg-white">Get the extension</a>
+        <a href="/showcase" className="rounded-full border border-line px-5 py-3 text-sm font-medium transition hover:bg-white">See real traces →</a>
       </div>
 
       <div key={run} className="relative mt-12 rounded-3xl border border-line bg-white p-5 shadow-[0_20px_60px_-30px_rgba(60,40,0,.35)] sm:p-8" aria-hidden>

@@ -1,0 +1,1157 @@
+{
+  "generatedAt": "2026-11-15T06:53:52.712Z",
+  "items": [
+    {
+      "claim": "Insanity is doing the same thing over and over again and expecting different results. — Albert Einstein",
+      "run": "01a1db72-b0e3-74b0-a304-dab07703b3ea",
+      "fast": {
+        "title": "Misattributed: the words are real, the source is wrong",
+        "kind": "disputed",
+        "detail": "2 of 3 relevant pages say the attribution is wrong (e.g. businessinsider.com). Quote Investigator traces the wording; excerpt only shows it is usually credited to Einstein, not a primary source.",
+        "confidence": {
+          "level": "low",
+          "why": "AI-judged: no page clearly establishes where it began"
+        },
+        "ms": 12284,
+        "usd": 0.00027,
+        "ai": true,
+        "pages": 4
+      },
+      "origin": {
+        "title": "Quote Origin: Insanity Is Doing the Same Thing Over and Over Again and Expecting Different Results – Quote Investigator®",
+        "url": "https://quoteinvestigator.com/2017/03/23/same/",
+        "date": "2017-03-23",
+        "host": "quoteinvestigator.com",
+        "primary": false
+      },
+      "trail": [
+        {
+          "date": "2013-10-07",
+          "host": "businessinsider.com",
+          "title": "12 Famous Quotes That Always Get Misattributed ",
+          "url": "https://www.businessinsider.com/misattributed-quotes-2013-10",
+          "wording": "We've all heard Albert Einstein's famous line: \"Insanity is doing the same thing over and over again and expecting different results.\"",
+          "relation": "debunks",
+          "flags": [
+            "added absolute “all”"
+          ],
+          "isOrigin": false,
+          "primary": false
+        },
+        {
+          "date": "2017-03-23",
+          "host": "quoteinvestigator.com",
+          "title": "Quote Origin: Insanity Is Doing the Same Thing Over and Over Again and Expecting Different Results – Quote Investigator®",
+          "url": "https://quoteinvestigator.com/2017/03/23/same/",
+          "wording": "The definition of insanity is doing the same thing over and over again and expecting a different result.",
+          "relation": "mentions",
+          "isOrigin": true,
+          "primary": false
+        },
+        {
+          "date": "2025-11-07",
+          "host": "snopes.com",
+          "title": "Did Einstein say, 'Insanity is doing the same thing over and over again and expecting different results'?",
+          "url": "https://www.snopes.com/fact-check/einstein-insanity-quote/",
+          "wording": "Albert Einstein once said, \"Insanity is doing the same thing over and over again and expecting different results.\"",
+          "relation": "debunks",
+          "flags": [],
+          "isOrigin": false,
+          "primary": false
+        }
+      ],
+      "deep": {
+        "status": "refuted",
+        "summary": "The quote originates anonymously in a 12-step recovery community (earliest documented form: Knoxville News-Sentinel, October 11, 1981, quoting an unnamed Al-Anon member), was refined in an NA approval draft the same month, popularized in Rita Mae Brown's 1983 novel Sudden Death, and was not attributed to Einstein until 1990—the attribution is a confirmed fabrication listed under 'Misattributed to Einstein' in Princeton University Press's authoritative The Ultimate Quotable Einstein.",
+        "origin": {
+          "title": "Al-Anon Helps Family, Friends to Orderly Lives (Knoxville News-Sentinel)",
+          "url": "https://www.newspapers.com/clip/knoxville-news-sentinel-1981-10-11/",
+          "date": "1981-10-11",
+          "source_type": "other",
+          "exact_wording": "Insanity is doing the same thing over and over again and expecting different results."
+        },
+        "changes": [
+          "Attribution fabricated: the quote originated anonymously in a 12-step recovery community (Al-Anon meeting, Oct 1981); Einstein's name was not attached until 1990, 35 years after his death, with no primary source ever produced.",
+          "Wording drift from NA (1981): 'repeating the same mistakes' became 'doing the same thing' in Brown's 1983 novel and in the most widely circulated version.",
+          "Conjunction change: Brown's 1983 novel uses 'but expecting different results'; the circulated claim uses 'and expecting different results'.",
+          "Addition of 'The definition of insanity is…' framing: neither the 1981 nor the 1983 sources use the definite-article 'definition' construction; this was added by later users.",
+          "'A different result' (singular, 1990 Earle attribution) became 'different results' (plural) in later popular versions."
+        ],
+        "steps": [
+          {
+            "title": "Al-Anon Helps Family, Friends to Orderly Lives — Knoxville News-Sentinel, by Betsy Pickle",
+            "url": "https://www.newspapers.com/clip/knoxville-news-sentinel-1981-10-11/",
+            "date": "1981-10-11",
+            "exact_wording": "Insanity is doing the same thing over and over again and expecting different results.",
+            "note": "Earliest documented appearance of the exact phrasing; attributed to an unnamed Al-Anon member, not to Einstein or any named person."
+          },
+          {
+            "title": "Narcotics Anonymous Basic Text — Approval Draft (W.S.C. Literature Sub-Committee)",
+            "url": "https://nauca.us/wp-content/uploads/2015/04/1981-11-Basic-Text-Approval-Form-White.pdf",
+            "date": "1981-11",
+            "exact_wording": "Insanity is repeating the same mistakes and expecting different results.",
+            "note": "Close variant: 'repeating the same mistakes' instead of 'doing the same thing'; p. 11 of approval draft; no attribution to any named person or Einstein."
+          },
+          {
+            "title": "Sudden Death — Rita Mae Brown (Bantam Books, New York)",
+            "url": "https://en.wikiquote.org/wiki/Rita_Mae_Brown",
+            "date": "1983",
+            "exact_wording": "Unfortunately, Susan didn't remember what Jane Fulton once said. 'Insanity is doing the same thing over and over again, but expecting different results.'",
+            "note": "Uses 'but expecting' not 'and expecting'; attributed within the novel to a fictional character (Jane Fulton), not to Einstein. First wide-print appearance of the 'doing the same thing' phrasing. Brown likely recycled a phrase already circulating in recovery communities."
+          },
+          {
+            "title": "Yale Book of Quotations — Fred R. Shapiro, ed. (Yale University Press)",
+            "url": "https://en.wikiquote.org/wiki/Talk:Rita_Mae_Brown",
+            "date": "2006",
+            "exact_wording": "Insanity is doing the same thing over and over again, but expecting different results. Sudden Death (1983)",
+            "note": "Shapiro attributed the quote to Brown, p. 109; this was the scholarly consensus before the 1981 Al-Anon and NA sources were fully documented. No Einstein attribution."
+          },
+          {
+            "title": "Austin American-Statesman — first documented Einstein attribution (via Ronnie Earle, reported by Mike Ward)",
+            "url": "https://www.snopes.com/fact-check/einstein-insanity-quote/",
+            "date": "1990",
+            "exact_wording": "Einstein once said that insanity is doing the same thing over and over and expecting a different result.",
+            "note": "First documented instance of Einstein's name being attached to the quote, 35 years after his death; this is a secondary attribution (DA Earle says Einstein said it), not a primary source; wording uses 'a different result' (singular) rather than 'different results' (plural)."
+          },
+          {
+            "title": "The Ultimate Quotable Einstein — Alice Calaprice, ed. (Princeton University Press)",
+            "url": "https://www.snopes.com/fact-check/einstein-insanity-quote/",
+            "date": "2010",
+            "exact_wording": "It is listed within a section called 'Misattributed to Einstein'",
+            "note": "Definitive scholarly refutation; quote appears on p. 474 under 'Misattributed to Einstein'; research assisted by Barbara Wolff of the Albert Einstein Archives, Hebrew University of Jerusalem."
+          }
+        ],
+        "sources": 27
+      }
+    },
+    {
+      "claim": "95% of startups fail.",
+      "run": "01a1db59-9c87-7928-8f07-acb567a98881",
+      "fast": {
+        "title": "Mixed evidence",
+        "kind": "unclear",
+        "detail": "5 pages state it and 3 dispute it. Traces the 95% figure to Mr. Ghosh's research, but it is defined by missed projected ROI, not general failure.",
+        "confidence": {
+          "level": "low",
+          "why": "AI-judged: no page clearly establishes where it began"
+        },
+        "ms": 35251,
+        "usd": 0.00081,
+        "ai": true,
+        "pages": 9
+      },
+      "origin": {
+        "title": "Report: 75% of Venture-backed Start-ups Fail",
+        "url": "https://www.inc.com/john-mcdermott/report-3-out-of-4-venture-backed-start-ups-fail.html",
+        "date": "2012-09-20",
+        "host": "inc.com",
+        "primary": false
+      },
+      "trail": [
+        {
+          "date": "2012-09-20",
+          "host": "inc.com",
+          "title": "Report: 75% of Venture-backed Start-ups Fail",
+          "url": "https://www.inc.com/john-mcdermott/report-3-out-of-4-venture-backed-start-ups-fail.html",
+          "wording": "But if a start-up failure is defined as not delivering the projected return on investment, then 95% of VC companies are failures, Ghosh said.",
+          "relation": "mentions",
+          "isOrigin": true,
+          "primary": false,
+          "via": "Mr. Ghosh's research (Shikhar Ghosh, Harvard Business School, cited in a Wall St"
+        },
+        {
+          "date": "2012-09-20",
+          "host": "web.archive.org",
+          "title": "The Venture Capital Secret: 3 Out of 4 Start-Ups Fail",
+          "url": "https://web.archive.org/web/20141022073921/http:/online.wsj.com:80/news/articles/SB10000872396390443720204578004980476429190",
+          "wording": "If failure is defined as failing to see the projected return on investment—say, a specific revenue growth rate or date to break even on cash flow—then more than 95% of start-ups fail, based on Mr. Gho",
+          "relation": "states",
+          "flags": [],
+          "isOrigin": false,
+          "primary": false
+        },
+        {
+          "date": "2021-02-23",
+          "host": "financialpipeline.com",
+          "title": "Why do most startups fail? | The Financial Pipeline",
+          "url": "https://www.financialpipeline.com/why-do-most-startups-fail/",
+          "wording": "Under the most comprehensive definition of failure, “failing to see the projected return on investment – say, a specific revenue growth rate or date to break even cash flow – then more than 95 per cen",
+          "relation": "debunks",
+          "flags": [
+            "figure changed: 95% → 95"
+          ],
+          "isOrigin": false,
+          "primary": false,
+          "via": "Ghosh's research (Shikhar Ghosh, Harvard Business School)"
+        },
+        {
+          "date": "2026-08-24",
+          "host": "arxiv.org",
+          "title": "Startup success prediction and VC portfolio simulation using CrunchBase data",
+          "url": "https://arxiv.org/html/2309.15552v1",
+          "wording": "It is estimated that approximately 90% of startups fail within their first five years, a failure rate that has remained relatively constant over the past few decades, despite considerable advancements",
+          "relation": "debunks",
+          "flags": [
+            "figure changed: 95% → 90%"
+          ],
+          "isOrigin": false,
+          "primary": true
+        }
+      ],
+      "deep": {
+        "status": "misquoted",
+        "summary": "The '95% of startups fail' claim is a misquotation of Shikhar Ghosh's conditional 2011 finding that 90–95% of VC-backed companies miss their own declared projections—a definition-specific, population-restricted statistic that was progressively stripped of context as it passed through the Wall Street Journal (2012), Inc. Magazine (2013), and unattributed aggregator sites, eventually hardening into an unqualified universal fact that no primary dataset supports.",
+        "origin": {
+          "title": "Why Companies Fail—and How Their Founders Can Bounce Back",
+          "url": "https://hbswk.hbs.edu/item/why-companies-failand-how-their-founders-can-bounce-back",
+          "date": "2011-03",
+          "source_type": "other",
+          "exact_wording": "And if failure is defined as declaring a projection and then falling short of meeting it, then the failure rate is a whopping 90 to 95 percent."
+        },
+        "changes": [
+          "Ghosh's original statement applied three different failure rates to three different definitions; only the broadest definition (missing any declared projection) yielded 90–95%",
+          "Ghosh's data covered only VC-backed companies that raised at least $1 million from 2004–2010, not all startups",
+          "The Wall Street Journal (Sept 2012) published 'more than 95% of start-ups fail' in the article body while dropping the definitional qualifier, alongside a headline of '3 Out of 4 Start-Ups Fail'",
+          "Inc. Magazine (Aug/Sept 2013) preserved 'fall short of their initial projections' but did not reproduce the full three-tier ladder, making the figure easy to decontextualize",
+          "HuffPost and aggregators (2015–2016 onward) stripped all attribution and qualifiers, stating '95% of startups fail' as an unqualified universal fact",
+          "The figure migrated between 90% and 95% across sources, with no consistent primary citation",
+          "BLS data shows actual business closure rates of ~20% at year 1, ~50% at year 5, and ~65% at year 10, contradicting the 95% figure under any operational definition of failure"
+        ],
+        "steps": [],
+        "sources": 34
+      }
+    },
+    {
+      "claim": "Humans use only 10% of their brains.",
+      "run": "01a1dde7-4b90-7a4f-b1b3-da1c92f516c8",
+      "fast": {
+        "title": "Likely wrong: sources call it false",
+        "kind": "disputed",
+        "detail": "6 of 8 relevant pages say this claim is false or a myth (e.g. nature.com). Page traces the myth to William James's 1908 book, though it cites no primary source directly.",
+        "confidence": {
+          "level": "high",
+          "why": "AI-judged: origin is a dated primary-source page that addresses the claim directly"
+        },
+        "ms": 32015,
+        "usd": 0.00067,
+        "ai": true,
+        "pages": 11
+      },
+      "origin": {
+        "title": "Do we only use 10% of our brain? | Think Twice",
+        "url": "https://sites.utexas.edu/think-twice/2021/09/14/do-we-only-use-10-of-our-brain/",
+        "date": "2021-09-14",
+        "host": "sites.utexas.edu",
+        "primary": true
+      },
+      "trail": [
+        {
+          "date": "2009-11-09",
+          "host": "frontiersin.org",
+          "title": "Frontiers | The human brain in numbers: a linearly scaled-up primate brain",
+          "url": "https://www.frontiersin.org/journals/human-neuroscience/articles/10.3389/neuro.09.031.2009/full?source=post%5C_page---------------------------",
+          "wording": "Curiously, the widespread concept that neurons represent about 10% of all cells in the human brain might be one of the arguments behind the popular, but mistaken, notion that we only use 10% of our br",
+          "relation": "mentions",
+          "flags": [
+            "added figure 10%, 2002",
+            "added absolute “all”"
+          ],
+          "isOrigin": false,
+          "primary": false
+        },
+        {
+          "date": "2014-07-17",
+          "host": "nature.com",
+          "title": "\"Lucy\" is Wrong; We Use Way More Than 10% of Our Brains | Mind Read | Learn Science at Scitable",
+          "url": "https://www.nature.com/scitable/blog/mind-read/lucy_is_wrong_we_use/",
+          "wording": "\"It is estimated most human beings only use ten percent of their brain's capacity,\" lectures Professor Norman, played by actor Morgan Freeman, in the trailer for the new thriller Lucy.",
+          "relation": "debunks",
+          "flags": [
+            "dropped figure 10%"
+          ],
+          "isOrigin": false,
+          "primary": true
+        },
+        {
+          "date": "2021-09-14",
+          "host": "sites.utexas.edu",
+          "title": "Do we only use 10% of our brain? | Think Twice",
+          "url": "https://sites.utexas.edu/think-twice/2021/09/14/do-we-only-use-10-of-our-brain/",
+          "wording": "For example, one common myth is that humans only use 10% of our brains.",
+          "relation": "debunks",
+          "isOrigin": true,
+          "primary": true,
+          "via": "William James"
+        },
+        {
+          "date": "2026-11-14",
+          "host": "britannica.com",
+          "title": "Do We Really Use Only 10 Percent of Our Brain? | Britannica",
+          "url": "https://www.britannica.com/print/article/2268448",
+          "wording": "It’s one of Hollywood’s favorite bits of pseudoscience: human beings use only 10 percent of their brain, and awakening the remaining 90 percent—supposedly dormant—allows otherwise ordinary human being",
+          "flags": [
+            "figure changed: 10% → 10, 90",
+            "added absolute “only”"
+          ],
+          "isOrigin": false,
+          "primary": false
+        }
+      ],
+      "deep": {
+        "status": "refuted",
+        "summary": "The '10% of the brain' claim has no identifiable primary scientific source; it evolved from William James's 1907 metaphor about untapped mental energy (no percentage, no brain reference) through a 1929 anonymous self-help advertisement and Lowell Thomas's uncited 1936 attribution to James, with each retelling adding precision and neurological specificity the original never contained, until the vague philosophical observation became a blunt and false neuroscientific assertion.",
+        "origin": null,
+        "changes": [
+          "James (1907) used 'small part of our possible mental and physical resources' — no percentage, no brain reference, concept is energy/potential not neurology",
+          "1929 World Almanac ad added the explicit '10 percent' figure and shifted the subject to 'brain power', but was anonymous advertising copy with no scientific backing",
+          "Lowell Thomas (1936) attached '10 percent' to William James by name without any citation, changed 'resources' to 'latent mental ability', and framed it as a reported recollection ('used to say') rather than a quotation",
+          "Self-help writers (e.g., Witt, 1983) further shifted 'latent mental ability' to 'brainpower', implying a neurological claim about the brain organ",
+          "Popular culture (advertising, films such as Lucy 2014) converted the claim into an explicit, blunt neurological assertion: 'uses 10% of their brain capacity', presented as scientific fact",
+          "Albert Einstein was falsely inserted as an authority for the claim; the Einstein Archives found no such statement",
+          "No peer-reviewed study, clinical report, or official dataset has ever been found making the '10% of the brain' claim as a measured scientific finding"
+        ],
+        "steps": [
+          {
+            "title": "The Energies of Men (William James, 1907)",
+            "url": "https://en.wikisource.org/wiki/The_Energies_of_Men",
+            "date": "1907",
+            "exact_wording": "We are making use of only a small part of our possible mental and physical resources.",
+            "note": "No percentage stated; refers to mental and physical resources/energy, not the brain as an organ; claim about untapped potential, not neurology"
+          },
+          {
+            "title": "World Almanac self-help advertisement (reproduced in Mind Myths, 1999)",
+            "url": null,
+            "date": "1929",
+            "exact_wording": "There is NO LIMIT to what the human brain can accomplish. Scientists and psychologists tell us we use only about TEN PERCENT of our brain power.",
+            "note": "First known explicit '10 percent of brain power' statement; anonymous advertising copy, not a scientific source; no specific scientist cited; known only via secondary reproduction in Mind Myths (1999)"
+          },
+          {
+            "title": "Introduction: A Shortcut to Distinction (Lowell Thomas foreword to Carnegie's How to Win Friends and Influence People)",
+            "url": "https://socialskillswisdom.com/introduction-a-shortcut-to-distinction-by-lowell-thomas/",
+            "date": "1936",
+            "exact_wording": "Professor William James of Harvard used to say that the average man develops only ten percent of his latent mental ability.",
+            "note": "Second-hand attribution ('used to say'), no citation to any James text; narrows James's 'mental and physical resources' to 'latent mental ability'; attaches precise 10% figure James never used; still refers to mental ability, not brain tissue"
+          },
+          {
+            "title": "How to Be Twice as Smart (Scott Witt, 1983)",
+            "url": null,
+            "date": "1983",
+            "exact_wording": "If you're like most people, you're using only ten percent of your brainpower.",
+            "note": "Shifts from 'latent mental ability' to 'brainpower', implying the brain organ; no scientific source cited; self-help book, Prentice Hall"
+          },
+          {
+            "title": "The Ten-Percent Myth (Benjamin Radford, Skeptical Inquirer, March/April 1999)",
+            "url": "https://skepticalinquirer.org/1999/03/the-ten-percent-myth/",
+            "date": "1999-03-01",
+            "exact_wording": "The origins of the myth are not at all clear. Beyerstein, of the Brain Behaviour Laboratory at Simon Fraser University in British Columbia, has traced it back to at least the early part of the century.",
+            "note": "Debunking article; confirms no clear origin found; refers readers to Beyerstein's Mind Myths chapter for detailed analysis; does not itself resolve the origin"
+          },
+          {
+            "title": "Great myths of the brain: We only use 10 per cent (Christian Jarrett, BPS Psychologist, summarising Beyerstein's Mind Myths chapter)",
+            "url": "https://www.bps.org.uk/psychologist/great-myths-brain-we-only-use-10-cent",
+            "date": null,
+            "exact_wording": "The journalist Lowell Thomas aided this process in his preface to Dale Carnegie's mega-selling 1936 self-help book How to Win Friends and Influence People, where he attached the precise 10 percent figure to James's point about potential, writing: \"Professor William James of Harvard used to say that the average person develops only 10 percent of his latent mental ability.\"",
+            "note": "Secondary summary of Beyerstein's findings; confirms Thomas as the vector who added the precise percentage to James's vaguer claim; notes James 'didn't put a precise figure on it'"
+          }
+        ],
+        "sources": 27
+      }
+    },
+    {
+      "claim": "The Great Wall of China is visible from space.",
+      "run": "01a1dde7-4e29-75e6-bdf2-821d90a8b6b7",
+      "fast": {
+        "title": "Likely wrong: sources call it false",
+        "kind": "disputed",
+        "detail": "8 of 8 relevant pages say this claim is false or a myth (e.g. spacenews.com). Popular belief traced to older books, games, and TV; Yang Liwei's 2003 statement first challenged it in print.",
+        "confidence": {
+          "level": "medium",
+          "why": "AI-judged: Popular belief traced to older books, games, and TV; Yang Liwei's 2003 statement first challenged it in print."
+        },
+        "ms": 36410,
+        "usd": 0.00073,
+        "ai": true,
+        "pages": 11
+      },
+      "origin": {
+        "title": "'I did not see Great Wall from space': Yang Liwei",
+        "url": "https://en.people.cn/200310/17/eng20031017_126232.shtml",
+        "date": "2003-10-17",
+        "host": "en.people.cn",
+        "primary": false
+      },
+      "trail": [
+        {
+          "date": "2003-10-17",
+          "host": "en.people.cn",
+          "title": "'I did not see Great Wall from space': Yang Liwei",
+          "url": "https://en.people.cn/200310/17/eng20031017_126232.shtml",
+          "wording": "| | | | | | | --- | --- | --- | --- | | | | | --- | | Last updated at: (Beijing Time) Friday, October 17, 2003 | | 'I did not see Great Wall from space': Yang Liwei | | China's first astronaut Yang Li",
+          "relation": "debunks",
+          "isOrigin": true,
+          "primary": false,
+          "via": "Yang Liwei, first Chinese astronaut, 2003 (as reported in PMC letter and SpaceNe"
+        },
+        {
+          "date": "2003-10-17",
+          "host": "aljazeera.com",
+          "title": "China’s spaceman shatters a myth",
+          "url": "https://www.aljazeera.com/news/2003/10/17/chinas-spaceman-shatters-a-myth",
+          "wording": "Yang Liwei has exploded the widely held belief that the Great Wall is the only man-made object visible with the naked eye from outer space.",
+          "relation": "debunks",
+          "flags": [
+            "dropped figure 17, 2003",
+            "added absolute “only”"
+          ],
+          "isOrigin": false,
+          "primary": false,
+          "via": "Yang Liwei, first Chinese astronaut, 2003 (as reported in PMC letter and SpaceNe"
+        },
+        {
+          "date": "2003-10-23",
+          "host": "theguardian.com",
+          "title": "Can you see the Great Wall of China from space?",
+          "url": "https://www.theguardian.com/science/2003/oct/23/thisweekssciencequestions",
+          "wording": "His comments were taken, in some quarters, as proof that the story about the Great Wall (it being the only man-made structure that can be seen from space) is nothing more than a myth.",
+          "relation": "debunks",
+          "flags": [
+            "dropped figure 17, 2003",
+            "added absolute “only”"
+          ],
+          "isOrigin": false,
+          "primary": false,
+          "via": "Yang Liwei, first Chinese astronaut, 2003 (as reported in PMC letter and SpaceNe"
+        },
+        {
+          "date": "2026-02-22",
+          "host": "timesofindia.indiatimes.com",
+          "title": "Great Wall of China is visible from space: Fact or myth? | - The Times of India",
+          "url": "https://timesofindia.indiatimes.com/life-style/travel/news/great-wall-of-china-is-visible-from-space-fact-or-myth/articleshow/128671144.cms",
+          "wording": "If there were an Olympic event for persistent global myths, the claim that the Great Wall of China is visible from space would win gold every single time.",
+          "relation": "debunks",
+          "flags": [
+            "dropped figure 17, 2003",
+            "added absolute “every”"
+          ],
+          "isOrigin": false,
+          "primary": false
+        }
+      ],
+      "deep": {
+        "status": "refuted",
+        "summary": "The claim originates as speculative rhetorical hyperbole in a 1754 letter by William Stukeley (published 1887), was amplified by Henry Norman (1895) and Ripley's Believe It or Not! (1932), given false scientific authority by Richard Halliburton (1938), and is comprehensively refuted by NASA and astronaut testimony—the wall is not visible from the Moon and only marginally detectable from low Earth orbit under exceptional conditions with optical aids.",
+        "origin": {
+          "title": "The Family Memoirs of the Rev. William Stukeley (letter of 1754, published 1887, Surtees Society, Vol. 3, p. 142)",
+          "url": null,
+          "date": "1754",
+          "source_type": "book",
+          "exact_wording": "This mighty wall [Hadrian's Wall] of four score miles [130 km] in length is only exceeded by the Chinese Wall, which makes a considerable figure upon the terrestrial globe, and may be discerned at the Moon."
+        },
+        "changes": [
+          "Stukeley (1754): speculative hedge ('may be discerned') about Hadrian's Wall with Chinese Wall mentioned comparatively; not a direct claim about China's wall",
+          "Norman (1895): converted to reported reputation ('enjoys the reputation'); now explicitly about China's wall as 'the only work of human hands' visible from moon",
+          "Ripley (1932): all hedging removed; presented as confident mass-audience assertion; added 'mightiest work of man' superlative",
+          "Halliburton (1938): fabricated scientific authority by attributing claim to 'astronomers'; entered textbooks as pseudo-scientific consensus",
+          "Modern popular form: 'Moon' replaced by 'space'; 'only man-made' qualifier dropped; claim generalized and all original caveats removed"
+        ],
+        "steps": [
+          {
+            "title": "The Family Memoirs of the Rev. William Stukeley (letter of 1754, published 1887, Surtees Society, Vol. 3, p. 142)",
+            "url": null,
+            "date": "1754",
+            "exact_wording": "This mighty wall [Hadrian's Wall] of four score miles [130 km] in length is only exceeded by the Chinese Wall, which makes a considerable figure upon the terrestrial globe, and may be discerned at the Moon.",
+            "note": "Origin: speculative comparative aside about Hadrian's Wall; Chinese Wall mentioned parenthetically; hedged with 'may be discerned'; not a claim about China's wall specifically"
+          },
+          {
+            "title": "The Peoples and Politics of the Far East, Henry Norman, p. 215",
+            "url": null,
+            "date": "1895",
+            "exact_wording": "Besides its age it enjoys the reputation of being the only work of human hands on the globe visible from the moon.",
+            "note": "Converts Stukeley's speculative 'may be discerned' into a reported social reputation; adds 'only work of human hands'; no longer hedged as speculation but framed as established lore"
+          },
+          {
+            "title": "Ripley's Believe It or Not! newspaper cartoon",
+            "url": null,
+            "date": "1932",
+            "exact_wording": "the mightiest work of man, the only one that would be visible to the human eye from the moon.",
+            "note": "Removes all hedging; presented as confident assertion to mass readership; adds superlative 'mightiest work of man'; speculation fully dropped"
+          },
+          {
+            "title": "Second Book of Marvels – The Orient, Richard Halliburton (Bobbs-Merrill, 1938)",
+            "url": null,
+            "date": "1938",
+            "exact_wording": "Astronomers say that the Great Wall is the only man-made thing on our planet visible to the human eye from the moon.",
+            "note": "Fabricates scientific authority by attributing claim to 'astronomers'; no astronomer ever made this claim; enters popular and textbook culture as pseudo-scientific fact"
+          },
+          {
+            "title": "Great Wall – NASA (PDF: great_wall_less_great_from_space.pdf)",
+            "url": "https://www.nasa.gov/wp-content/uploads/static/history/PDFs/great_wall_less_great_from_space.pdf",
+            "date": "2005",
+            "exact_wording": "It has become a space-based myth. The Great Wall of China, frequently billed as the only man-made object visible from space, generally isn't, at least to the unaided eye in low Earth orbit. It certainly isn't visible from the Moon.",
+            "note": "Official NASA refutation; traces myth only to 1938 (Halliburton), omitting Stukeley 1754 and Norman 1895; confirms the claim is false"
+          },
+          {
+            "title": "Great Wall – NASA image article",
+            "url": "https://www.nasa.gov/image-article/great-wall/",
+            "date": "2005",
+            "exact_wording": "Despite myths to the contrary, the wall isn't visible from the moon, and is difficult or impossible to see from Earth orbit without the high-powered lenses used for this photo.",
+            "note": "Secondary NASA statement corroborating the PDF refutation; specifies even low Earth orbit visibility requires telephoto lens"
+          }
+        ],
+        "sources": 32
+      }
+    },
+    {
+      "claim": "Humans swallow eight spiders a year in their sleep.",
+      "run": "01a1dde7-5067-7a61-92f7-1606c3de14b6",
+      "fast": {
+        "title": "Likely wrong: sources call it false",
+        "kind": "disputed",
+        "detail": "4 of 5 relevant pages say this claim is false or a myth (e.g. scientificamerican.com). Scientific American fact-check, 2014, is the earliest primary debunking source naming the myth.",
+        "confidence": {
+          "level": "medium",
+          "why": "AI-judged: Scientific American fact-check, 2014, is the earliest primary debunking source naming the myth."
+        },
+        "ms": 17055,
+        "usd": 0.00036,
+        "ai": true,
+        "pages": 5
+      },
+      "origin": {
+        "title": "Do People Really Swallow 8 Spiders a Year While They Sleep?",
+        "url": "https://www.scientificamerican.com/article/fact-or-fiction-people-swallow-8-spiders-a-year-while-they-sleep1/",
+        "date": "2014-04-15",
+        "host": "scientificamerican.com",
+        "primary": false
+      },
+      "trail": [
+        {
+          "date": "2014-04-15",
+          "host": "scientificamerican.com",
+          "title": "Do People Really Swallow 8 Spiders a Year While They Sleep?",
+          "url": "https://www.scientificamerican.com/article/fact-or-fiction-people-swallow-8-spiders-a-year-while-they-sleep1/",
+          "wording": "Luckily for all of us, the “fact” that people swallow eight spiders in their sleep yearly isn’t true.",
+          "relation": "debunks",
+          "isOrigin": true,
+          "primary": false
+        },
+        {
+          "date": "2024-05-28",
+          "host": "classiccitynews.com",
+          "title": "Fact or Fiction? People Swallow 8 Spiders a Year While They Sleep",
+          "url": "https://www.classiccitynews.com/post/fact-or-fiction-people-swallow-8-spiders-a-year-while-they-sleep",
+          "wording": "Luckily for all of us, the “fact” that people swallow eight spiders in their sleep yearly isn’t true.",
+          "relation": "debunks",
+          "flags": [],
+          "isOrigin": false,
+          "primary": false,
+          "via": "Crawford"
+        },
+        {
+          "date": "2025-07-29",
+          "host": "factfizz.com",
+          "title": "Dragging Spiders into Our Mouths in Our Sleep? The Truth Behind the Eight-a-Year Myth - Fact Fizz",
+          "url": "https://factfizz.com/2025/07/29/dragging-spiders-into-our-mouths-in-our-sleep-the-truth-behind-the-eight-a-year-myth/",
+          "wording": "!Humans swallow eight spiders a year in their sleep: My investigation reveals this claim is false.",
+          "relation": "debunks",
+          "flags": [],
+          "isOrigin": false,
+          "primary": false
+        }
+      ],
+      "deep": {
+        "status": "unverifiable",
+        "summary": "No primary source for the 'eight spiders a year' claim has ever been found; the most widely cited origin story (a 1993 article by 'Lisa Birgit Holst' in 'PC Professional') was a deliberate April 2001 hoax by Snopes, admitted in August 2021, and the actual origin of this urban legend — which exists in multiple incompatible numerical versions — remains unknown.",
+        "origin": null,
+        "changes": [
+          "The number of spiders shifts freely across sources: 'eight per year,' 'four per year,' 'twenty in a lifetime,' 'eight in a lifetime,' and 'a pound in a lifetime' — no stable figure exists, indicating the statistic was never measured.",
+          "Snopes's 2001 article introduced a completely fabricated origin story (Holst / PC Professional / 1954 book / page 24) that was treated as fact by thousands of secondary sources for two decades.",
+          "The 1954 book 'Insect Fact and Folklore' is real but does not contain the spider-swallowing claim; Snopes's own follow-up page confirmed this.",
+          "The 1999 trivia listicle used 'eight in a lifetime,' but most later popular sources shifted to 'eight per year' — a significant escalation with no basis.",
+          "The Burke Museum's authoritative page uses 'four' per year, not 'eight' — the expert debunker's version of the claim itself differs from the most common popular form.",
+          "Some sources mistakenly attribute the Chicago Sun-Times article to 'Ellen Domke' and others to 'Zay N. Smith,' showing secondary-source copying errors in even the bibliographic record.",
+          "The Snapple cap version elevated an urban legend to a branded consumer 'Real Fact,' giving the unverified claim a commercial imprimatur."
+        ],
+        "steps": [
+          {
+            "title": "Cornell Engineer, 'Things to Stress Over' by Margot A. S. Vigeant (reported, unconfirmed)",
+            "url": null,
+            "date": "1990",
+            "exact_wording": "The average person swallows eight spiders a year while sleeping. What if all eight show up tonight?",
+            "note": "Reported by one secondary blog source as the earliest known print appearance; tongue-in-cheek in context; not independently confirmed in available primary evidence. If real, it predates all other references but was not asserting the claim as fact."
+          },
+          {
+            "title": "Usenet discussion: 'Eating Spiders?'",
+            "url": null,
+            "date": "1997-03",
+            "exact_wording": null,
+            "note": "Identified by LEMMiNO as the oldest independently verifiable online mention of the myth; exact wording not extracted in available evidence. Predates Snopes involvement."
+          },
+          {
+            "title": "Chicago Sun-Times, 'Average Folks Need to Keep Mouths Shut'",
+            "url": null,
+            "date": "1997-08-26",
+            "exact_wording": null,
+            "note": "Cited in Snopes source list as 'Domke, Ellen. Chicago Sun-Times. 26 August 1997 (p. 20)'; exact wording not available in evidence. Some sources attribute to Zay N. Smith, not Ellen Domke — author attribution is inconsistent across sources. Treated the claim as received trivia, not as an original assertion."
+          },
+          {
+            "title": "'50 Top Pieces of Trivia' listicle (source: Snopes citation)",
+            "url": null,
+            "date": "1999",
+            "exact_wording": "... average human eats eight spiders in their lifetime after they crawl into their mouths in their sleep.",
+            "note": "Quoted verbatim by Snopes's Lisa Birgit Holst page as evidence the legend predated Snopes. Notably says 'lifetime' not 'per year' — a significant variation from the most common form of the claim."
+          },
+          {
+            "title": "Snopes.com: 'Do People Swallow Eight Spiders Per Year?' (original article, fabricated citation)",
+            "url": "https://www.snopes.com/fact-check/swallow-spiders/",
+            "date": "2001-04",
+            "exact_wording": "This 'statistic' average the average person swallowing eight spiders per year was not only made up out of whole cloth, it was invented as an example of the absurd things people will believe simply because they come across them on the Internet.",
+            "note": "Attributed the claim's origin to a nonexistent journalist ('Lisa Birgit Holst'), a nonexistent magazine ('PC Professional'), and a nonexistent passage in a real 1954 book. The entire attribution was a deliberate April 2001 hoax by Snopes, admitted by founder David Mikkelson in August 2021. This step caused the fabricated origin story to propagate widely as if factual."
+          },
+          {
+            "title": "Burke Museum: 'Myth: You swallow spiders in your sleep' (Rod Crawford)",
+            "url": "https://www.burkemuseum.org/collections-and-research/biology/arachnology-and-entomology/spider-myths/myth-you-swallow-spiders",
+            "date": null,
+            "exact_wording": "Myth: You unknowingly swallow an average of four live spiders in your sleep each year. Fact: This very widespread urban legend has no basis in fact. ... For a sleeping person to swallow even one live spider would involve so many highly unlikely circumstances that for practical purposes we can rule out the possibility. No such case is on formal record anywhere in scientific or medical literature.",
+            "note": "Primary biological refutation. Does not identify any origin for the claim. Notably uses 'four' spiders per year, not 'eight' — a significant discrepancy from the most widely circulated version. Does not mention Holst, PC Professional, or any 1993 article."
+          }
+        ],
+        "sources": 37
+      }
+    },
+    {
+      "claim": "Goldfish have a three-second memory.",
+      "run": "01a1dde7-52a6-76b9-aec3-cd9608a4608d",
+      "fast": {
+        "title": "Likely wrong: sources call it false",
+        "kind": "disputed",
+        "detail": "7 of 7 relevant pages say this claim is false or a myth (e.g. web.archive.org). Controlled experiments from the 1960s onward show goldfish memory lasts weeks; the myth itself is popular belief.",
+        "confidence": {
+          "level": "medium",
+          "why": "AI-judged: Controlled experiments from the 1960s onward show goldfish memory lasts weeks; the myth itself is popular belief."
+        },
+        "ms": 19098,
+        "usd": 0.00044,
+        "ai": true,
+        "pages": 7
+      },
+      "origin": {
+        "title": "Do Goldfish Really Have A 3-Second Memory?",
+        "url": "https://www.scienceabc.com/nature/animals/do-goldfish-really-have-a-3-second-memory",
+        "date": "2022-11-11",
+        "host": "scienceabc.com",
+        "primary": false
+      },
+      "trail": [
+        {
+          "date": "2008-02-19",
+          "host": "web.archive.org",
+          "title": "Goldfish three-second memory myth busted - ABC News (Australian Broadcasting Corporation)",
+          "url": "https://web.archive.org/web/20110625100621/http:/www.abc.net.au/news/stories/2008/02/19/2166204.htm",
+          "wording": "There is a popular belief that goldfish only have a three-second memory span and every lap of their fishbowl is like seeing the world for the first time.",
+          "relation": "debunks",
+          "flags": [
+            "dropped figure 3-second",
+            "added absolute “only”"
+          ],
+          "isOrigin": false,
+          "primary": false
+        },
+        {
+          "date": "2008-02-19",
+          "host": "abc.net.au",
+          "title": "Goldfish three-second memory myth busted",
+          "url": "https://www.abc.net.au/news/2008-02-19/goldfish-three-second-memory-myth-busted/1046710",
+          "wording": "There is a popular belief that goldfish only have a three-second memory span and every lap of their fishbowl is like seeing the world for the first time.",
+          "relation": "debunks",
+          "flags": [
+            "dropped figure 3-second",
+            "added absolute “only”"
+          ],
+          "isOrigin": false,
+          "primary": false
+        },
+        {
+          "date": "2022-11-11",
+          "host": "scienceabc.com",
+          "title": "Do Goldfish Really Have A 3-Second Memory?",
+          "url": "https://www.scienceabc.com/nature/animals/do-goldfish-really-have-a-3-second-memory",
+          "wording": "The “goldfish has a 3-second memory” claim is a myth.",
+          "relation": "debunks",
+          "isOrigin": true,
+          "primary": false
+        },
+        {
+          "date": "2026-08-18",
+          "host": "researchtoolbench.com",
+          "title": "Do Goldfish Really Have a Three-Second Memory? — Research Tool Bench",
+          "url": "https://researchtoolbench.com/research-briefs/goldfish-three-second-memory-myth/",
+          "wording": "\"Goldfish have a three-second memory\" gets used as a punchline, a metaphor for short attention spans, and sometimes as an actual excuse for keeping a fish in a bare bowl.",
+          "relation": "debunks",
+          "flags": [
+            "dropped figure 3-second"
+          ],
+          "isOrigin": false,
+          "primary": false
+        }
+      ],
+      "deep": {
+        "status": "unverifiable",
+        "summary": "The claim that goldfish have a three-second memory has no traceable primary source: no study measured it, no publication originated it, and every serious investigation — including researchers, journalists, and the AMNH Young Naturalist essay's parenthetical citation of an unlocated 'Osborne (2010)' — has concluded it is unverifiable folklore, while decades of peer-reviewed science consistently refute it.",
+        "origin": null,
+        "changes": [
+          "The number is not stable: 'three seconds' is most common, but 'two seconds,' 'seven seconds,' 'nine seconds,' and 'ten seconds' all appear in circulation, indicating no measurement underlies the claim",
+          "After 2015, 'memory' was silently replaced by 'attention span' in many media outlets, and the goldfish figure changed from 3 to 9 seconds in the Microsoft Canada/Statistic Brain chain",
+          "Osborne (2010), the only academic-style citation for the three-second characterisation, cannot be located or quoted verbatim",
+          "No source demonstrates a first publication, measurement, or researcher originating the claim; all sources treat it as pre-existing folklore",
+          "MythBusters (2004) used the exact 'three seconds' wording but framed it as already-widespread myth, not as something they introduced"
+        ],
+        "steps": [
+          {
+            "title": "Bottle cap anecdote (reported by unnamed writer, cited in Smile O Smile)",
+            "url": "https://www.smileosmile.com/uncategorized/misc/goldfish-memory-myth/",
+            "date": "mid-1990s (reported 2010)",
+            "exact_wording": "One writer went looking for the origin in 2010 and came back empty-handed. The best he could offer was that he first ran into the claim in the mid-1990s, on a bottle cap.",
+            "note": "Second-hand anecdote; writer unnamed; bottle cap text unknown; unverifiable"
+          },
+          {
+            "title": "Osborne (2010) — cited in AMNH Young Naturalist essay; work not located",
+            "url": "https://www.amnh.org/learn-teach/curriculum-collections/young-naturalist-awards/goldfish-as-a-model-for-understanding-learning-and-memory-more-complex-than-you-think",
+            "date": "2010",
+            "exact_wording": "goldfish memory was frequently and often deridingly characterized as lasting three seconds (Osborne, 2010)",
+            "note": "Osborne (2010) is cited parenthetically with no title, journal, or first name; the work has not been located; this may itself be a secondary or popular source"
+          },
+          {
+            "title": "MythBusters Episode 15 'Sinking Titanic' — goldfish memory myth tested",
+            "url": "https://en.wikipedia.org/wiki/MythBusters_(2004_season)",
+            "date": "2004-02-22",
+            "exact_wording": "Myth statement: 'A goldfish's memory lasts only three seconds.' Status: Busted. Jamie trained his goldfish to recognize color patterns and complete an obstacle course under water. They remembered what Jamie had taught them over a month later and easily completed the same course without his prompting.",
+            "note": "Matches the popular wording exactly; treats the claim as pre-existing widespread myth, not as something MythBusters introduced"
+          },
+          {
+            "title": "ABC Australia: Schoolboy explodes goldfish memory myth (Rory Stokes)",
+            "url": "https://www.theage.com.au/national/schoolboy-explodes-goldfish-memory-myth-20080218-ge6qq7.html",
+            "date": "2008-02-18",
+            "exact_wording": "We are told that a goldfish has a memory span of less than three seconds and that no matter how small its tank is, it will always discover new places and objects.",
+            "note": "Slight softening: 'less than three seconds' rather than exactly three; no origin cited for the claim"
+          },
+          {
+            "title": "ABC Science: Three-second fish memory 'rubbish'",
+            "url": "https://www.abc.net.au/science/archive/articles/2010/01/14/2792407.htm",
+            "date": "2010-01-14",
+            "exact_wording": "It seems to come from an advert many years ago, but nobody is sure what it was for.",
+            "note": "Dr. Ashley Ward speculates origin is an old advertisement; this is acknowledged speculation, not documented fact"
+          },
+          {
+            "title": "AMNH Young Naturalist Award essay: Goldfish as a Model for Understanding Learning and Memory",
+            "url": "https://www.amnh.org/learn-teach/curriculum-collections/young-naturalist-awards/goldfish-as-a-model-for-understanding-learning-and-memory-more-complex-than-you-think",
+            "date": null,
+            "exact_wording": "In my literature review, I was disappointed to find that goldfish memory was frequently and often deridingly characterized as lasting three seconds (Osborne, 2010).",
+            "note": "Only academic-style citation in debunking literature for the three-second claim; Osborne (2010) unlocated; essay does not claim Osborne originated the figure"
+          }
+        ],
+        "sources": 33
+      }
+    },
+    {
+      "claim": "You need to walk 10,000 steps a day for good health.",
+      "run": "01a1dde7-54b1-7c15-930f-59274565696c",
+      "fast": {
+        "title": "Origin unclear",
+        "kind": "unclear",
+        "detail": "Earliest match is faith-venture.com (2022-09-23), which does not look like a primary source. Wording appears exactly as claimed.",
+        "confidence": {
+          "level": "medium",
+          "why": "origin is dated but not a primary-source domain"
+        },
+        "ms": 49917,
+        "ai": false,
+        "pages": 9
+      },
+      "origin": {
+        "title": "Contradictory Advice",
+        "url": "https://faith-venture.com/2022/09/23/contradictory-advice/",
+        "date": "2022-09-23",
+        "host": "faith-venture.com",
+        "primary": false
+      },
+      "trail": [
+        {
+          "date": "2018-04-23",
+          "host": "link.springer.com",
+          "title": "How many steps/day are enough? for adults - International Journal of Behavioral Nutrition and Physical Activity",
+          "url": "https://link.springer.com/article/10.1186/1479-5868-8-79",
+          "wording": "Specifically, an extra 2,000 steps/day for someone habitually taking only 2,000 steps/day was associated with a 2.8 cm lower waist circumference in men compared with 0.7 cm lower for men already walki",
+          "flags": [
+            "figure changed: 10,000 → 2,000, 2,000, 2.8, 0.7, 10,000",
+            "added absolute “only”"
+          ],
+          "isOrigin": false,
+          "primary": false
+        },
+        {
+          "date": "2022-09-23",
+          "host": "faith-venture.com",
+          "title": "Contradictory Advice",
+          "url": "https://faith-venture.com/2022/09/23/contradictory-advice/",
+          "wording": "“They” told you that you need to walk 10,000 steps a day for good health.",
+          "isOrigin": true,
+          "primary": false
+        },
+        {
+          "date": "2024-07-04",
+          "host": "lifestylemedicine.stanford.edu",
+          "title": "How to Get More Benefits from 10,000 Steps per Day | Lifestyle Medicine",
+          "url": "https://lifestylemedicine.stanford.edu/how-to-get-more-benefits-from-10000-steps-per-day/",
+          "wording": "Many of you are familiar with the 10,000-steps-a-day walking trend, but you may not know where it originated.",
+          "flags": [
+            "figure changed: 10,000 → 10,000-steps-a-day"
+          ],
+          "isOrigin": false,
+          "primary": true
+        },
+        {
+          "date": "2026-10-19",
+          "host": "onfieldnews.com",
+          "title": "Is it true that … you need to take 10,000 steps a day to be healthy? – On Field News- Sports news live from the ground",
+          "url": "https://www.onfieldnews.com/is-it-true-that-you-need-to-take-10000-steps-a-day-to-be-healthy/",
+          "wording": "The idea that we need to walk 10,000 steps a day originated not in medical research but in a 1960s marketing campaign for a pedometer, says Jack McNamara, senior lecturer in clinical exercise physiolo",
+          "flags": [
+            "added figure 1960s"
+          ],
+          "isOrigin": false,
+          "primary": false,
+          "via": "Jack McNamara"
+        }
+      ],
+      "deep": {
+        "status": "misquoted",
+        "summary": "The '10,000 steps a day for good health' claim traces not to any scientific study but to a 1965 Japanese commercial product slogan ('Healthcare with 10,000 steps/day') by Yamasa Tokei Keiki, with the 'you need' necessity framing added by popular media and fitness-tracker defaults, while the best available science (Lee et al., JAMA Internal Medicine, 2019) finds mortality benefits level off around 7,500 steps/day and explicitly states the 10,000-step goal has 'limited scientific basis.'",
+        "origin": {
+          "title": "YAMAX Manpo Meter launch — 'Manpo-kei' pedometer, Yamasa Tokei Keiki Co., Ltd.",
+          "url": "http://www.yamax-yamasa.com/aboutus/",
+          "date": "1965",
+          "source_type": "other",
+          "exact_wording": "Developed and launched the first pedometer 'Manpo Meter' under the slogan of 'Healthcare with 10,000 steps/day'."
+        },
+        "changes": [
+          "The original 1965 source was a commercial product slogan ('Healthcare with 10,000 steps/day'), not a scientific prescription; no 'you need' framing existed.",
+          "Hatano's 1960s caloric arithmetic was a theoretical estimate (300 kcal/day), not a clinical trial or validated health threshold; it was later cited academically but never constituted a formal guideline.",
+          "Tudor-Locke & Bassett 2004 introduced 10,000 steps as the lower boundary of their 'active' pedometer classification index, a preliminary research heuristic that was widely misread as a health recommendation.",
+          "The 2008 Tudor-Locke/Hatano paper explicitly stated 10,000 steps is 'commonly promoted despite any authoritative endorsement,' but popular media ignored this caveat.",
+          "The word 'need' (implying necessity and a minimum threshold) was added by popular media and fitness-tracker defaults, with no basis in the original slogan or any scientific source.",
+          "The Lee 2019 JAMA Internal Medicine study found mortality benefits plateau at ~7,500 steps/day in older women, directly contradicting the 10,000-step necessity claim.",
+          "Fitbit and other wearables setting 10,000 as the default goal laundered the marketing origin into an apparent technical/health standard, reinforcing the misquoted claim."
+        ],
+        "steps": [
+          {
+            "title": "YAMAX | Pedometer | About us — Yamasa Tokei Keiki Co., Ltd.",
+            "url": "http://www.yamax-yamasa.com/aboutus/",
+            "date": "1965",
+            "exact_wording": "Developed and launched the first pedometer 'Manpo Meter' under the slogan of 'Healthcare with 10,000 steps/day'. The well-known among world by word for pedometer 'Manpo-kei' (Manpo means 10,000 steps in Japanese) is our trademark.",
+            "note": "Primary origin: a commercial product slogan, not a scientific finding. No study cited. No necessity ('you need') implied."
+          },
+          {
+            "title": "Hatano Y. Use of the pedometer for promoting daily walking exercise. ICHPER-SD Journal 29:4–8.",
+            "url": null,
+            "date": "1993",
+            "exact_wording": "Dr. Yoshiro Hatano correlated 10,000 steps with approximately 300 kcal expended, which encourages adherence to healthful physical activity levels. [Cited in Tudor-Locke et al. 2008 and PMC9022022]",
+            "note": "Earliest identifiable academic publication linking 10,000 steps to a health rationale (caloric expenditure estimate). Not a clinical trial. Not directly accessible in evidence set; known only through secondary citations."
+          },
+          {
+            "title": "Tudor-Locke C, Bassett DR Jr. How Many Steps/Day Are Enough? Sports Medicine 34(1):1–8.",
+            "url": "https://link.springer.com/article/10.2165/00007256-200434010-00001",
+            "date": "2004",
+            "exact_wording": "A value of 10 000 steps/day is gaining popularity with the media and in practice and can be traced to Japanese walking clubs and a business slogan 30+ years ago.",
+            "note": "First major academic paper to trace the origin to Japanese walking clubs and a business slogan. Explicitly not an authoritative endorsement. Introduces preliminary pedometer indices, labeling ≥10,000 steps/day as 'active'—this classification was later misread as a health prescription."
+          },
+          {
+            "title": "Tudor-Locke C, Hatano Y, Pangrazi RP, Kang M. Revisiting 'How Many Steps Are Enough?' Med. Sci. Sports Exerc. 40(7S):S537–S543.",
+            "url": "https://www.colegiomedico.cl/wp-content/uploads/2023/07/%C2%BFCuantos-pasos-son-suficientes_.pdf",
+            "date": "2008",
+            "exact_wording": "This increasingly popular index can be traced to the 1960s when Japanese walking clubs embraced a pedometer manufacturer's (Yamasa Corporation, Tokyo, Japan) nickname for their product: manpo-kei (literally translated, 'ten thousand steps meter'). A value of 10,000 steps/day is often associated with a healthful level of PA ... and is commonly promoted despite any authoritative endorsement.",
+            "note": "Confirms origin in marketing/walking clubs with no authoritative health endorsement. The phrase 'despite any authoritative endorsement' directly contradicts the popular claim's implied authority."
+          },
+          {
+            "title": "Lee IM et al. Association of Step Volume and Intensity With All-Cause Mortality in Older Women. JAMA Internal Medicine 179(8):1105–1112.",
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6547157/",
+            "date": "2019-05-29",
+            "exact_wording": "A goal of 10 000 steps/d is commonly believed by the public to be necessary for health, but this number has limited scientific basis. However, the origin of the goal of 10 000 steps per day is unclear. It likely derives from the trade name of a pedometer sold in 1965 by Yamasa Clock and Instrument Company in Japan called Manpo-kei, which translates to '10 000 steps meter' in Japanese.",
+            "note": "Landmark peer-reviewed study. Explicitly states the 10,000-step goal has 'limited scientific basis.' Finds mortality benefit plateaus at ~7,500 steps/day in older women, well below 10,000."
+          },
+          {
+            "title": "10,000 steps a day — or fewer? Harvard Health Publishing",
+            "url": "https://www.harvardhealth.org/blog/10000-steps-a-day-or-fewer-2019071117305",
+            "date": "2019-07-01",
+            "exact_wording": "Dr. Lee discovered that the origins of the number go back to 1965, when a Japanese company made a device named Manpo-kei, which translates to '10,000 steps meter.' 'The name was a marketing tool,' she says.",
+            "note": "High-credibility secondary summary. Correctly attributes origin to marketing tool. Transmits the nuance of the Lee 2019 findings accurately but adds lay-accessible framing."
+          }
+        ],
+        "sources": 28
+      }
+    },
+    {
+      "claim": "Let them eat cake. — Marie Antoinette",
+      "run": "01a1ddf2-04a6-7036-a0e4-eb9fccf93737",
+      "fast": {
+        "title": "Misattributed: the words are real, the source is wrong",
+        "kind": "disputed",
+        "detail": "2 of 4 relevant pages say the attribution is wrong (e.g. history.com). No page identifies a primary source or earliest attestation of the words being spoken by her.",
+        "confidence": {
+          "level": "low",
+          "why": "AI-judged: no page clearly establishes where it began"
+        },
+        "ms": 40297,
+        "usd": 0.00038,
+        "ai": true,
+        "pages": 5
+      },
+      "origin": {
+        "title": "Marie Antoinette: “Qu’ils mangent de la brioche\"",
+        "url": "https://scalar.usc.edu/works/marie-antoinette-/let-them-eat-cake-2",
+        "host": "scalar.usc.edu",
+        "primary": true
+      },
+      "trail": [
+        {
+          "date": "2012-10-24",
+          "host": "history.com",
+          "title": "Did Marie-Antoinette Really Say 'Let Them Eat Cake'? | HISTORY",
+          "url": "https://www.history.com/articles/did-marie-antoinette-really-say-let-them-eat-cake",
+          "wording": "At some point around 1789, when being told that her French subjects had no bread, Marie-Antoinette (bride of France’s King Louis XVI) supposedly sniffed, “Qu’ils mangent de la brioche”—“Let them eat c",
+          "relation": "debunks",
+          "flags": [
+            "figure changed: 12016-06-23T01:04:26-07:00Gary, Walker-Robertsff82d71fc8661901c549a69ff80c9bac7b614722100945image\\header2016-06-24T07:50:41-07:00Gary, Walker-Robertsff82d71fc8661901c549a69ff80c9bac7b614722 → 1789"
+          ],
+          "isOrigin": false,
+          "primary": false
+        },
+        {
+          "date": "2016-12-07",
+          "host": "solosophie.com",
+          "title": "Did Marie Antoinette Really Say \"Let Them Eat Cake\"? The True Story",
+          "url": "https://www.solosophie.com/real-story-behind-let-them-eat-cake-marie-antoinette/",
+          "wording": "“Let them eat cake!” is one of the most famous phrases associated with Marie Antoinette, the last Queen of France before the French Revolution.",
+          "relation": "debunks",
+          "flags": [
+            "dropped figure 12016-06-23T01:04:26-07:00Gary, Walker-Robertsff82d71fc8661901c549a69ff80c9bac7b614722100945image\\header2016-06-24T07:50:41-07:00Gary, Walker-Robertsff82d71fc8661901c549a69ff80c9bac7b614722"
+          ],
+          "isOrigin": false,
+          "primary": false
+        },
+        {
+          "date": "2022-04-14",
+          "host": "vogue.pt",
+          "title": "English Version | “Let them eat cake” - attributed to Marie Antoinette",
+          "url": "https://www.vogue.pt/english-version-misquoted-fake-quotes",
+          "wording": "“Let them eat cake” (which gives the text its title and has been replicated on mugs, T-shirts and other souvenirs for dozens of years) is the most famous phrase attributed to Marie Antoinette (1755-17",
+          "relation": "mentions",
+          "flags": [
+            "figure changed: 12016-06-23T01:04:26-07:00Gary, Walker-Robertsff82d71fc8661901c549a69ff80c9bac7b614722100945image\\header2016-06-24T07:50:41-07:00Gary, Walker-Robertsff82d71fc8661901c549a69ff80c9bac7b614722 → 1755-1793, 1788/99"
+          ],
+          "isOrigin": false,
+          "primary": false
+        },
+        {
+          "host": "scalar.usc.edu",
+          "title": "Marie Antoinette: “Qu’ils mangent de la brioche\"",
+          "url": "https://scalar.usc.edu/works/marie-antoinette-/let-them-eat-cake-2",
+          "wording": "12016-06-23T01:04:26-07:00Gary Walker-Robertsff82d71fc8661901c549a69ff80c9bac7b614722100945image\\header2016-06-24T07:50:41-07:00Gary Walker-Robertsff82d71fc8661901c549a69ff80c9bac7b614722 “Qu’ils mang",
+          "relation": "mentions",
+          "isOrigin": true,
+          "primary": true
+        }
+      ],
+      "deep": {
+        "status": "misquoted",
+        "summary": "The quote originates in Jean-Jacques Rousseau's Confessions (c.1765–1767), where an unnamed 'great princess' says 'let them eat brioche'; it was never attributed to Marie Antoinette in any contemporary source, the first hedged printed link to her name appeared in Alphonse Karr's Les Guêpes in 1841 (48 years after her death), and the popular English form 'Let them eat cake — Marie Antoinette' compounds a chronological impossibility with a mistranslation.",
+        "origin": {
+          "title": "Les Confessions, Livre VI",
+          "url": "https://fr.wikisource.org/wiki/Les_Confessions_(Rousseau)/Livre_VI",
+          "date": "1765",
+          "source_type": "book",
+          "exact_wording": "Enfin je me rappelai le pis-aller d'une grande princesse à qui l'on disait que les paysans n'avaient pas de pain, et qui répondit : Qu'ils mangent de la brioche."
+        },
+        "changes": [
+          "Speaker changed: Rousseau's unnamed 'une grande princesse' became 'Marie Antoinette' — first tentatively in Karr 1841, then in popular discourse, with no evidentiary basis.",
+          "Food changed: 'brioche' (rich buttery bread) mistranslated as 'cake' in popular English renderings; one 1901 translation used 'pastry' instead.",
+          "Certainty inflated: Karr introduced the name with explicit doubt ('vrai ou faux'); popular usage dropped all hedging and stated the attribution as fact.",
+          "Context stripped: the original is a passing recalled anecdote in Rousseau's autobiography about his own hunger; popular usage frames it as a defiant royal declaration to starving subjects.",
+          "Timeline ignored: Rousseau wrote the passage c.1765–1767 when Marie Antoinette was approximately 9–11 years old and living in Vienna, making attribution to her chronologically impossible."
+        ],
+        "steps": [
+          {
+            "title": "Les Confessions, Livre VI — Jean-Jacques Rousseau",
+            "url": "https://fr.wikisource.org/wiki/Les_Confessions_(Rousseau)/Livre_VI",
+            "date": "1765",
+            "exact_wording": "Enfin je me rappelai le pis-aller d'une grande princesse à qui l'on disait que les paysans n'avaient pas de pain, et qui répondit : Qu'ils mangent de la brioche.",
+            "note": "Origin. Speaker is unnamed ('une grande princesse'); food is brioche, not cake; published posthumously 1782; Marie Antoinette was ~9–11 years old in Vienna when written."
+          },
+          {
+            "title": "Les Guêpes — Alphonse Karr, November 1841",
+            "url": null,
+            "date": "1841-11",
+            "exact_wording": "Cet aperçu rappelle le mot vrai ou faux qu'on rapporte de Marie Antoinette",
+            "note": "First known printed link of Marie Antoinette's name to the saying, but explicitly hedged as 'true or false' (vrai ou faux); Karr is reporting a rumour, not asserting fact."
+          },
+          {
+            "title": "Les Guêpes — Alphonse Karr, April 1843",
+            "url": "https://www.gutenberg.org/files/42798/42798-h/42798-h.htm",
+            "date": "1843-04",
+            "exact_wording": "Le hasard m'a fait un de ces jours derniers rencontrer un livre daté de 1760 — où on raconte le même mot d'une duchesse de Toscane, — ce qui me paraît prouver à peu près que le mot n'a pas été dit par Marie-Antoinette, mais retrouvé et mis en circulation contre elle.",
+            "note": "Karr cites a 1760 book attributing the phrase to a Duchess of Tuscany and explicitly argues Marie Antoinette did NOT say it; paradoxically, naming her to refute the claim cemented the association in public discourse."
+          },
+          {
+            "title": "Campion-Vincent & Shojaei Kawan, 'Marie-Antoinette et son célèbre dire', Annales historiques de la Révolution française",
+            "url": "https://www.persee.fr/doc/ahrf_0003-4436_2002_num_327_1_2564",
+            "date": "2002",
+            "exact_wording": "MARIE-ANTOINETTE ET SON CÉLÈBRE DIRE : DEUX SCÉNOGRAPHIES ET DEUX SIÈCLES DE DÉSORDRES, TROIS NIVEAUX DE COMMUNICATION ET TROIS MODES ACCUSATOIRES",
+            "note": "Scholarly study confirming Karr 1841 is earliest located written link between Marie Antoinette and the phrase; found no attribution in revolutionary-era press, pamphlets, caricatures, or trial records."
+          },
+          {
+            "title": "Popular English-language diffusion: 'Let them eat cake — Marie Antoinette'",
+            "url": null,
+            "date": null,
+            "exact_wording": "Let them eat cake. — Marie Antoinette",
+            "note": "Modern popular form. Introduces two errors absent from every earlier source: (1) replaces unnamed 'grande princesse' with 'Marie Antoinette'; (2) mistranslates 'brioche' as 'cake'. No primary source supports this wording or attribution."
+          }
+        ],
+        "sources": 23
+      }
+    },
+    {
+      "claim": "Sugar makes children hyperactive.",
+      "run": "01a1ddf2-024f-7d0c-83c4-1627701b20b0",
+      "fast": {
+        "title": "Likely wrong: sources call it false",
+        "kind": "disputed",
+        "detail": "5 of 8 relevant pages say this claim is false or a myth (e.g. www.ncbi.nlm.nih.gov). No page identifies a primary study or original source establishing the claim; it appears to be a popular belief.",
+        "confidence": {
+          "level": "high",
+          "why": "AI-judged: origin is a dated primary-source page that addresses the claim directly"
+        },
+        "ms": 32338,
+        "usd": 0.00048,
+        "ai": true,
+        "pages": 9
+      },
+      "origin": {
+        "title": "News: Does sugar make kids hyper? That's... (CNN News) - Behind the headlines - NLM",
+        "url": "https://www.ncbi.nlm.nih.gov/search/research-news/8074/",
+        "date": "2019-04-18",
+        "host": "ncbi.nlm.nih.gov",
+        "primary": true
+      },
+      "trail": [
+        {
+          "date": "2019-04-18",
+          "host": "ncbi.nlm.nih.gov",
+          "title": "News: Does sugar make kids hyper? That's... (CNN News) - Behind the headlines - NLM",
+          "url": "https://www.ncbi.nlm.nih.gov/search/research-news/8074/",
+          "wording": "Many parents blame sugar for their children’s hyperactive behavior.",
+          "relation": "debunks",
+          "isOrigin": true,
+          "primary": true
+        },
+        {
+          "date": "2022-10-26",
+          "host": "news.llu.edu",
+          "title": "Is sugar making my child hyper? | News",
+          "url": "https://news.llu.edu/health-wellness/sugar-making-my-child-hyper",
+          "wording": "Sugar itself may not make your child hyper, but it does affect your child’s health and future.",
+          "relation": "debunks",
+          "flags": [
+            "dropped hedge “Many”"
+          ],
+          "isOrigin": false,
+          "primary": true
+        },
+        {
+          "date": "2023-10-31",
+          "host": "kidspot.com.au",
+          "title": "Were your kids on a sugar high last night? Experts say it’s all in your head",
+          "url": "https://kidspot.news.com.au/parenting/primary-school/were-your-kids-on-a-sugar-high-last-night-experts-say-its-all-in-your-head/news-story/48c8cf65572876154fe0e36070b338cd?nk=64da1c322e39109d5607952306c86425-1794718113",
+          "wording": "The science shows pretty conclusively that sugar itself doesn’t make children hyperactive.",
+          "relation": "debunks",
+          "flags": [
+            "dropped hedge “Many”"
+          ],
+          "isOrigin": false,
+          "primary": false,
+          "via": "Sabiha Kanchwala"
+        },
+        {
+          "date": "2026-10-29",
+          "host": "teach.peabody.kids",
+          "title": "Does sugar make kids hyper? What the research says (for teachers)",
+          "url": "https://teach.peabody.kids/library/myths/sugar-makes-kids-hyper",
+          "wording": "The claim: “Sugar makes children hyperactive.”",
+          "relation": "debunks",
+          "flags": [
+            "dropped hedge “Many”"
+          ],
+          "isOrigin": false,
+          "primary": false
+        }
+      ],
+      "deep": {
+        "status": "refuted",
+        "summary": "The claim 'sugar makes children hyperactive' has no primary scientific source asserting it as a finding; it is a folk extrapolation from Feingold's 1975 book about food additives (which did not implicate sugar), and every controlled primary study in the citation trail — including the definitive Wolraich et al. 1995 JAMA meta-analysis — directly refutes it.",
+        "origin": null,
+        "changes": [
+          "Feingold (1975) claimed food additives — not sugar — cause hyperactivity; sugar was absent from his original diet; the public conflated the two",
+          "The 1978 hypoglycemia study found a metabolic correlate; popular press interpreted this as sugar causing hyperactivity, which the study did not assert",
+          "Milich & Pelham (1986) and Rosen et al. (1988) found null or clinically insignificant effects; these refutations were largely ignored in popular discourse",
+          "Hoover & Milich (1994) showed parental expectation — not sugar — drives perceived hyperactivity; popular media sometimes cited this as confirmation that parents 'observe' sugar effects",
+          "Wolraich et al. (1995) JAMA meta-analysis concluded sugar does not affect behavior or cognition; popular claim strips all caveats and reverses the actual finding",
+          "The popular claim 'sugar makes children hyperactive' is a folk extrapolation from Feingold's additive theory, amplified by media, with no primary scientific source that asserts it as a supported finding"
+        ],
+        "steps": [
+          {
+            "title": "Medical literature, 1922 (unnamed source)",
+            "url": null,
+            "date": "1922",
+            "exact_wording": "The notion that sugar might make children behave badly first appeared in the medical literature in 1922.",
+            "note": "Reported only by NYT (2020) as a secondary attribution; original 1922 document, author, and journal are unidentified and unverifiable from available evidence"
+          },
+          {
+            "title": "Why Your Child Is Hyperactive — Benjamin F. Feingold, Random House",
+            "url": null,
+            "date": "1975",
+            "exact_wording": "Feingold (1975) claimed that food additives cause hyperactivity in children. [Book promoted] a diet for children (and families) that eliminated food additives and colorings.",
+            "note": "Feingold's claim was about food additives, colorings, and salicylates — not sugar. Sugar was not mentioned in the original diet. The public conflated sugar-rich foods with additive-rich foods, producing the sugar-hyperactivity myth as a folk extrapolation."
+          },
+          {
+            "title": "1978 study on reactive hypoglycemia in hyperactive children — Food and Cosmetics Toxicology",
+            "url": null,
+            "date": "1978",
+            "exact_wording": "hyperactive children given glucose tolerance tests had results that suggested reactive hypoglycemia (low blood sugar). As yet, though, there are no good theories to explain the connection.",
+            "note": "First empirical bridge connecting sugar metabolism to hyperactivity-related phenomena; did not assert sugar causes hyperactivity; interpreted in popular press as supporting the causal claim"
+          },
+          {
+            "title": "Effects of sugar ingestion on the classroom and playground behavior of attention deficit disordered boys — Milich & Pelham (1986)",
+            "url": "https://psycnet.apa.org/record/1987-08815-001",
+            "date": "1986",
+            "exact_wording": "Results offer no support for the contention that sugar ingestion adversely affects the behavior or learning of ADD boys.",
+            "note": "One of several pre-1990 controlled studies finding null results; directly contradicts the popular claim; belief attributed to children's difficulty readjusting after snack periods"
+          },
+          {
+            "title": "Effects of sugar ingestion expectancies on mother-child interactions — Hoover & Milich, Journal of Abnormal Child Psychology 22(4)",
+            "url": "https://link.springer.com/article/10.1007/BF02168088",
+            "date": "1994-08",
+            "exact_wording": "This study tested the hypothesis that commonly reported negative effects of sugar on children's behavior may be due to parental expectancies. A challenge study design was employed, in which thirty-five 5- to 7-year-old boys reported by their mothers to be behaviorally 'sugar sensitive,' and their mothers, were randomly assigned to experimental and control groups... all children actually received the placebo (aspartame). Mothers in the sugar expectancy condition rated their children as significantly more hyperactive.",
+            "note": "Refutes the claim by showing the perceived effect is entirely driven by parental expectation; all children received placebo; frequently cited by popular media as contextualizing the myth without distorting its conclusion"
+          },
+          {
+            "title": "The effect of sugar on behavior or cognition in children: A meta-analysis — Wolraich, Wilson & White, JAMA 274(20)",
+            "url": "https://pubmed.ncbi.nlm.nih.gov/7474248/",
+            "date": "1995-11-22",
+            "exact_wording": "The meta-analytic synthesis of the studies to date found that sugar does not affect the behavior or cognitive performance of children. The strong belief of parents may be due to expectancy and common association. However, a small effect of sugar or effects on subsets of children cannot be ruled out.",
+            "note": "Definitive scientific refutation of the claim; 16 reports, 23 within-subject blinded studies, all 95% CIs include zero; frequently correctly summarized in secondary sources but stands in direct opposition to the popular claim"
+          }
+        ],
+        "sources": 26
+      }
+    }
+  ]
+}

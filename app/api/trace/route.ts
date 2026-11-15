@@ -3,7 +3,9 @@ import claimsLib from "@/extension/claims.js";
 import { wordDiff, driftFlags, type Tok } from "@/lib/diff";
 import { judge, judgeEnabled, JUDGE_MODEL, type JudgeInput, type Judgement, type Relation } from "@/lib/judge";
 import { rateLimit } from "@/lib/guard";
-import { bestPassage, compare, findDate, normDate, isPrimary, isDisputed, isTight, links, attributions, strip, norm, type Match } from "@/lib/analyze";
+import { findCitation } from "@/lib/walk";
+import { knownRun } from "@/lib/known";
+import { loosePassage, bestPassage, compare, findDate, normDate, isPrimary, isDisputed, isTight, links, attributions, strip, norm, type Match } from "@/lib/analyze";
 
 export const maxDuration = 60; // fits Vercel Hobby; the trace budgets its own time below
 export const runtime = "nodejs";
@@ -18,11 +20,30 @@ type Conf = { level: string; why: string };
 
 const MAX_HOPS = 3;
 const SOFT_DEADLINE = 28_000; // after this, stop following citations and answer with what we have
+const WALK_START = 26_000; // the upstream walk only starts if the trace is still fast...
+const WALK_STEP = 34_000;
+const WALK_HARD = 50_000; // the walk is cut off here, whatever it is doing // ...and a second step only if it is still comfortably inside the 60s limit
 const JUDGE_DEADLINE = 46_000; // after this there is no time left for the AI judge: answer with the rule-based judgement
 // where primary sources live: used to make TinyFish Search return studies, filings and datasets, not just popular copies
 const PRIMARY = "nih.gov,ncbi.nlm.nih.gov,cdc.gov,nasa.gov,noaa.gov,census.gov,bls.gov,sec.gov,who.int,arxiv.org,nber.org,ssrn.com,nature.com,science.org,jamanetwork.com,nejm.org,pnas.org,thelancet.com,oecd.org,worldbank.org,un.org,europa.eu,harvard.edu,mit.edu,stanford.edu";
 const JUNK_SITE = /crossword|wordle|scrabble|word ?finder|quizlet|jeopardy|trivia ?answers|lyrics|clue[s]?\b/i;
 const STRONG = 0.66; // below this, a sentence is only loosely about the claim
+const byDate = (x: Source, y: Source) => (x.date ?? "9999").localeCompare(y.date ?? "9999") || +y.primary - +x.primary || y.score - x.score;
+
+/** The short, dated trail for the one-click card: where it began, any step the walk followed, and the latest repeat. */
+function buildTrail(sources: Source[], origin: Source) {
+  const rel = sources.filter((s) => s.relation !== "unrelated" && s.status !== "related");
+  const pick = new Set<Source>([origin]);
+  rel.filter((s) => s.hop >= 4).forEach((s) => pick.add(s)); // steps the upstream walk followed
+  for (const s of rel) { if (pick.size >= 3) break; if (s.date) pick.add(s); } // earliest dated repeats
+  const last = [...rel].reverse().find((s) => s.date);
+  if (last) pick.add(last);
+  return [...pick].sort(byDate).slice(0, 5).map((s) => ({
+    date: s.date, host: s.host.replace(/^www\./, ""), title: s.title, url: s.url, wording: s.passage.slice(0, 200), relation: s.relation,
+    flags: s.flags?.slice(0, 2), isOrigin: s === origin, primary: s.primary, via: s.via,
+  }));
+}
+
 const yr = (d?: string) => +(d ?? "9999").slice(0, 4);
 
 const cache = new Map<string, { at: number; done: Record<string, unknown> }>();
@@ -30,9 +51,8 @@ const TTL = 6 * 3600e3;
 
 /** the matched sentence plus a little surrounding text: what the judge reads */
 function around(paragraph: string, sentence: string): string {
-  const p = strip(paragraph), i = p.indexOf(sentence.slice(0, 40));
-  if (i < 0) return sentence.slice(0, 420);
-  return p.slice(Math.max(0, i - 110), Math.min(p.length, i + sentence.length + 110)).slice(0, 440);
+  const p = strip(paragraph), i = Math.max(0, p.indexOf(sentence.slice(0, 30)));
+  return p.slice(Math.max(0, i - 60), i + sentence.length + 280).slice(0, 540); // wide enough to include a credit just after the sentence
 }
 
 /** the deterministic judgement (no model): kept as the fallback and as a measured baseline */
@@ -71,13 +91,13 @@ function decide(claim: string, sources: Source[], checked: number) {
 }
 
 /** the Haiku-assisted judgement: same evidence, but it reads meaning (states / mentions / debunks) instead of counting words */
-function decideJudged(claim: string, sources: Source[], j: Judgement, checked: number, fallback: ReturnType<typeof decide>) {
+function decideJudged(claim: string, sources: Source[], j: Judgement, checked: number, fallback: ReturnType<typeof decide>, forced?: Source) {
   const live = sources.filter((s) => s.relation && s.relation !== "unrelated");
   if (!live.length) return fallback;
   const debunk = live.filter((s) => s.relation === "debunks"), states = live.filter((s) => s.relation === "states");
-  const byDate = (l: Source[]) => l.find((s) => s.date) ?? l[0];
   const picked = j.originId ? sources[j.originId - 1] : undefined;
-  const origin = picked && picked.relation !== "unrelated" ? picked : byDate(live.filter((s) => s.primary || s.relation === "states")) ?? byDate(live);
+  const firstOf = (l: Source[]) => l.find((s) => s.date) ?? l[0];
+  const origin = forced ?? (picked && picked.relation !== "unrelated" ? picked : firstOf(live.filter((s) => s.primary || s.relation === "states")) ?? firstOf(live));
   // a stance that needs evidence must have it: no "false" without a debunking page, no "supported" next to one
   let stance = j.stance;
   if ((stance === "false" || stance === "misattributed") && !debunk.length) stance = "mixed";
@@ -205,7 +225,7 @@ export async function POST(req: Request) {
         const deduped = sources.filter((s) => (uniq.has(canon(s.url)) ? false : (uniq.add(canon(s.url)), true)));
         sources.length = 0; sources.push(...deduped);
         // order: dated oldest first, undated last; primary wins ties
-        sources.sort((x, y) => (x.date ?? "9999").localeCompare(y.date ?? "9999") || +y.primary - +x.primary || y.score - x.score);
+        sources.sort(byDate);
 
         const baseline = decide(claim, sources, checked);
         let { origin, verdict, confidence } = baseline;
@@ -225,9 +245,65 @@ export async function POST(req: Request) {
               s.disputed = r.relation === "debunks";
               if (r.relation === "unrelated") s.status = "related";
             }
-            const out = decideJudged(claim, sources, j, checked, baseline);
+            // Upstream walk: a page often credits its source ("according to Harvard's Shikhar Ghosh"). Follow that credit to the source itself.
+            const walked: { cited: string; to: string }[] = [];
+            let forced: Source | undefined, cur = decideJudged(claim, sources, j, checked, baseline).origin, walkUsd = 0;
+            let walkCancelled = false;
+            const walkLoop = async () => {
+              for (let step = 0; step < 2 && Date.now() - T0 < (step === 0 ? WALK_START : WALK_STEP); step++) {
+                const peers = sources.filter((x) => x !== cur && (x.relation === "states" || x.relation === "debunks")).sort(byDate).slice(0, 2);
+                const credit = await findCitation(claim, [cur, ...peers].map((x) => ({ host: x.host.replace(/^www\./, ""), date: x.date, text: x.ctx ?? x.passage })));
+                if (!credit) break;
+                send({ type: "step", msg: `Following the credit upstream: “${credit.cited}”` });
+                const [q1, q2] = await Promise.all([soft(search(credit.query)), soft(search(`${credit.cited} ${short}`))]);
+                // rank by how well a result matches the credited name (so Harvard's own page beats a blog), skip PDF downloads, read only the best 4
+                const wanted = norm(credit.cited).split(" ").filter((w) => w.length >= 4);
+                const rank = (h: SearchHit) => wanted.filter((w) => norm(`${h.url} ${h.title}`).includes(w)).length;
+                const found = [...q1.slice(0, 5), ...q2.slice(0, 5)]
+                  .filter((h, i, arr) => !seen.has(h.url) && !/download|\.pdf(\?|$)/i.test(h.url) && arr.findIndex((x) => x.url === h.url) === i)
+                  .sort((x, y) => rank(y) - rank(x)).slice(0, 4);
+                if (!found.length) break;
+                for (const h of found) { seen.add(h.url); const d = normDate(h.date); if (d) dates.set(h.url, d); }
+                const pg = await fetchPages(found.map((h) => h.url), { each: true }).catch(() => []);
+                const cand: Source[] = [];
+                send({ type: "step", msg: `Read ${pg.length} page${pg.length === 1 ? "" : "s"} for “${credit.cited}”` });
+                for (const p of pg) {
+                  checked++;
+                  if (JUNK_SITE.test(`${p.title ?? ""} ${new URL(p.url).host}`)) continue;
+                  const lp = loosePassage(p.text, claim);
+                  if (!lp) continue;
+                  const cmp = compare(claim, lp.sentence);
+                  cand.push({
+                    url: p.final_url || p.url, title: p.title || new URL(p.url).host, host: new URL(p.url).host, date: dates.get(p.url) ?? findDate(p.text),
+                    passage: lp.sentence, score: Math.round(Math.min(1, lp.score) * 100) / 100, status: cmp.status, note: cmp.note, primary: isPrimary(p.url, ""),
+                    disputed: false, hop: 4 + step, citedBy: cur.url, via: credit.cited, ctx: lp.ctx,
+                  });
+                }
+                if (!cand.length) { send({ type: "step", msg: `None of them state the figure; staying with the earlier source` }); break; }
+                const wj = await judge(claim, cand.map((x, i) => ({ id: i + 1, host: x.host.replace(/^www\./, ""), title: x.title, date: x.date, primary: x.primary, excerpt: x.ctx ?? x.passage })));
+                if (!wj) break;
+                walkUsd += wj.usage.usd;
+                cand.forEach((x, i) => { const r = wj.pages.get(i + 1); if (r) { x.relation = r.relation; x.judgeQuote = r.quote; x.disputed = r.relation === "debunks"; if (r.relation === "unrelated") x.status = "related"; } });
+                const good = cand.filter((x) => x.relation === "states" || x.relation === "debunks" || x.relation === "mentions");
+                if (!good.length) break;
+                if (walkCancelled) return; // cut off while waiting: leave the results untouched
+                  sources.push(...good); // appended, so earlier ids stay valid until the final sort
+                const best = [...good].sort((a, b) => +(b.relation === "states") - +(a.relation === "states") || +b.primary - +a.primary || (a.date ?? "9999").localeCompare(b.date ?? "9999"))[0];
+                // walking upstream: the new origin must be at least as early as where we came from, or a primary source
+                if (best.primary || !best.date || !cur.date || best.date <= cur.date) {
+                  forced = best; cur = best;
+                  walked.push({ cited: credit.cited, to: `${best.host.replace(/^www\./, "")}${best.date ? " " + best.date : ""}` });
+                } else { send({ type: "step", msg: `Found ${best.host.replace(/^www\./, "")}, but it is not earlier than the current source` }); break; }
+              }
+            };
+            // hard cutoff: the whole walk must finish early enough for the answer to be sent inside Vercel's 60s limit
+            let cutoff: ReturnType<typeof setTimeout> | undefined;
+            await Promise.race([walkLoop(), new Promise<void>((ok) => { cutoff = setTimeout(() => { walkCancelled = true; ok(); }, Math.max(500, WALK_HARD - (Date.now() - T0))); })]);
+            clearTimeout(cutoff);
+            const out = decideJudged(claim, sources, j, checked, baseline, forced);
             ({ origin, verdict, confidence } = out);
-            judgeInfo = { used: true, model: JUDGE_MODEL, stance: j.stance, reason: j.originReason, usd: Number(j.usage.usd.toFixed(5)), tokens: j.usage, cached: j.cached };
+            sources.sort(byDate);
+            judgeInfo = { used: true, model: JUDGE_MODEL, stance: j.stance, reason: j.originReason, usd: Number((j.usage.usd + walkUsd).toFixed(5)), tokens: j.usage, cached: j.cached, walk: walked };
           } else judgeInfo = { used: false, reason: "AI judge unavailable or over its daily cap; used the rule-based judgement" };
         }
 
@@ -242,8 +318,9 @@ export async function POST(req: Request) {
         if (origin && !noOrigin) for (const s of sources) if (s !== origin) { const d = wordDiff(origin.passage, s.passage); s.drift = d.similarity; s.diff = d.toks; s.flags = driftFlags(d.toks); }
         const echo = { copies: sources.length, primaries: sources.filter((s) => s.primary).length, hosts: new Set(sources.map((s) => s.host)).size };
         const pub = sources.map(({ ctx: _c, ...s }) => { void _c; return s; });
+        const trail = origin && !noOrigin ? buildTrail(sources, origin) : [];
         const done = {
-          type: "done", verdict, origin: noOrigin ? undefined : origin?.url, sources: pub, checked, echo, confidence, judge: judgeInfo, ms: Date.now() - T0,
+          type: "done", verdict, origin: noOrigin ? undefined : origin?.url, sources: pub, trail, knownRun: knownRun(asked, claim), checked, echo, confidence, judge: judgeInfo, ms: Date.now() - T0,
           baseline: judgeInfo.used ? { verdict: baseline.verdict, origin: baseline.origin?.url, confidence: baseline.confidence } : undefined,
         };
         if (verdict.kind !== "error") cache.set(ckey, { at: Date.now(), done }); // never cache a temporary failure

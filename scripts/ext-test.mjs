@@ -29,6 +29,10 @@ assert.ok(reply.ok, reply.error);
 console.log(" verdict:", reply.verdict.title, "| confidence:", reply.confidence.level, "| echo:", JSON.stringify(reply.echo));
 console.log(" origin :", reply.origin && `${reply.origin.date} ${reply.origin.host} "${reply.origin.passage.slice(0, 70)}"`);
 assert.ok(reply.verdict.title && reply.origin && reply.origin.url.startsWith("http"));
+console.log(" trail  :", (reply.trail || []).map((t) => `${t.date ?? "undated"} ${t.host}`).join(" > ") || "(none)");
+console.log(" deep   :", reply.deep ? `${reply.deep.status}: ${reply.deep.summary.slice(0, 110)}…` : "(no finished TinyResearch run for this claim)");
+assert.ok(Array.isArray(reply.trail), "trail must be an array");
+if (process.env.EXPECT_DEEP) assert.ok(reply.deep && reply.deep.summary, "expected a finished TinyResearch summary");
 
 // 3. "Full trace" opens a popup with the claim URL-encoded
 onMsg({ trace: "95% of startups fail & more?" }, {}, () => {});

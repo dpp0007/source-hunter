@@ -26,6 +26,8 @@ const cache = new Map<string, { at: number; j: Judgement }>();
 const TTL = 6 * 3600e3;
 let client: Anthropic | null = null;
 export const judgeEnabled = () => !!process.env.ANTHROPIC_API_KEY && process.env.DISABLE_HAIKU !== "1";
+export const haiku = () => (client ??= new Anthropic({ maxRetries: 0, timeout: 14_000 }));
+export { MAX_DAILY as HAIKU_MAX_DAILY };
 
 const SCHEMA = {
   type: "object",
@@ -59,7 +61,7 @@ For each page excerpt decide "relation" to the CLAIM:
 - unrelated: about something else, or only shares words with the claim
 "quote": copy a phrase (max 25 words) VERBATIM from that page's excerpt that justifies the relation; empty string only for unrelated.
 "origin_id": the page that best shows where the claim or figure FIRST came from (prefer primary sources, earlier dates, pages naming the original source); 0 if no page does.
-"origin_reason": max 20 words. "stance" of the claim overall given the pages: supported, false, misattributed (real words, wrong person/source), mixed, or unverifiable.
+"origin_reason": max 20 words. "stance" of the claim overall given the pages: supported, false, mixed (some pages back it, some dispute or qualify it, e.g. a statistic whose figure or scope was changed), or unverifiable. Use "misattributed" ONLY for a quote or saying credited to the wrong person (real words, wrong speaker); never for a statistic or factual claim.
 Never use knowledge outside the excerpts.`;
 
 const key = (claim: string, ins: JudgeInput[]) =>

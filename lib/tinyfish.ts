@@ -28,22 +28,27 @@ export type Page = { url: string; final_url: string; title: string; text: string
 
 const httpHref = (u: string) => { try { const x = new URL(u); return /^https?:$/.test(x.protocol) ? x.href : ""; } catch { return ""; } };
 
-export async function fetchPages(urls: string[]): Promise<Page[]> {
+export async function fetchPages(urls: string[], opts: { each?: boolean } = {}): Promise<Page[]> {
   // Fetch rejects the WHOLE batch on one bad URL, so normalise first and keep a map back to the caller's spelling
   const back = new Map<string, string>();
   for (const u of urls) { const n = httpHref(u); if (n && !back.has(n)) back.set(n, u); }
   const list = [...back.keys()].slice(0, 10);
   if (!list.length) return [];
-  const post = async (batch: string[]): Promise<Page[]> => {
-    const r = await fetch("https://api.fetch.tinyfish.ai", { method: "POST", headers: H(), body: JSON.stringify({ urls: batch, format: "markdown" }), signal: AbortSignal.timeout(22_000) });
+  const post = async (batch: string[], ms = 22_000): Promise<Page[]> => {
+    const r = await fetch("https://api.fetch.tinyfish.ai", { method: "POST", headers: H(), body: JSON.stringify({ urls: batch, format: "markdown" }), signal: AbortSignal.timeout(ms) });
     if (!r.ok) throw Object.assign(new Error(`TinyFish Fetch ${r.status}: ${(await r.text()).slice(0, 200)}`), { status: r.status });
     return (await r.json()).results ?? [];
   };
+  // one request per URL, each with its own short timeout: a single slow page (a PDF download, say) cannot sink the others
+  const each = async () => (await Promise.allSettled(list.map((u) => post([u], 12_000)))).flatMap((x) => (x.status === "fulfilled" ? x.value : []));
   let results: Page[];
-  try { results = await post(list); } catch (e) {
-    if ((e as { status?: number }).status !== 400 || list.length === 1) throw e;
-    // still rejected: fetch one by one so a single bad URL cannot sink the others
-    results = (await Promise.allSettled(list.map((u) => post([u])))).flatMap((x) => (x.status === "fulfilled" ? x.value : []));
+  if (opts.each) results = await each();
+  else {
+    try { results = await post(list); } catch (e) {
+      const timedOut = /abort|timeout/i.test(String(e)), status = (e as { status?: number }).status;
+      if ((status !== 400 && !timedOut) || list.length === 1) throw e;
+      results = await each();
+    }
   }
   return results.filter((p) => typeof p.text === "string").map((p) => ({ ...p, url: back.get(p.url) ?? p.url }));
 }

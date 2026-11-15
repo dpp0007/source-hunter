@@ -4,6 +4,7 @@ import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import Logo from "./Logo";
+import { KNOWN } from "@/lib/known";
 
 type Source = { url: string; title: string; host: string; date?: string; passage: string; score: number; status: string; note: string; primary: boolean; disputed: boolean; hop: number; citedBy?: string; via?: string; drift?: number; flags?: string[]; diff?: { t: string; k: "same" | "del" | "add" }[]; relation?: string; judgeQuote?: string };
 type Echo = { copies: number; primaries: number; hosts: number };
@@ -55,11 +56,7 @@ const REL: Record<string, [string, string]> = {
 // public site: deep verification costs credits, so it is a button by default (set NEXT_PUBLIC_AUTO_DEEP=1 to run it with every trace)
 const AUTO_DEFAULT = process.env.NEXT_PUBLIC_AUTO_DEEP === "1";
 // finished TinyResearch runs: open instantly, no new spend
-const DEMOS = [
-  { label: "Einstein “insanity” quote", q: "Insanity is doing the same thing over and over again and expecting different results. — Albert Einstein", run: "01a1db72-b0e3-74b0-a304-dab07703b3ea" },
-  { label: "“95% of startups fail”", q: "95% of startups fail.", run: "01a1db59-9c87-7928-8f07-acb567a98881" },
-  { label: "Sugar and hyperactivity", q: "Sugar makes children hyperactive.", run: "01a1db4f-3af6-719a-9e8c-189f75e013ac" },
-];
+const DEMOS = KNOWN.map((k) => ({ label: k.q.length > 40 ? `${k.q.slice(0, 38)}…` : k.q, q: k.q, run: k.run }));
 const canon = (u: string) => { try { const x = new URL(u); return x.host.replace(/^www\./, "") + x.pathname.replace(/\/+$/, ""); } catch { return u; } };
 const host = (u: string) => { try { return new URL(u).host.replace(/^www\./, ""); } catch { return u; } };
 const okRes = (r?: Check) => !!r && (r.status === "verified" || r.status === "close");
@@ -132,7 +129,7 @@ export default function Tracer({ compact = false }: { compact?: boolean }) {
           if (m.type === "step") setSteps((s) => [...s, m.msg]);
           else if (m.type === "source") setSources((s) => [...s, m.source]);
           else if (m.type === "error") setError(m.message);
-          else if (m.type === "done") { setSources(m.sources); setVerdict(m.verdict); setOrigin(m.origin); setEcho(m.echo); setConf(m.confidence); setJudge(m.judge); }
+          else if (m.type === "done") { setSources(m.sources); setVerdict(m.verdict); setOrigin(m.origin); setEcho(m.echo); setConf(m.confidence); setJudge(m.judge); if (m.knownRun) watch(m.knownRun); /* a finished TinyResearch run exists: attach it free */ }
         }
       }
     } catch (e) { setError((e as Error).message); }
@@ -384,7 +381,7 @@ export default function Tracer({ compact = false }: { compact?: boolean }) {
           )}
           {!compact && (
             <div className="mt-4">
-              <p className="text-[11px] font-semibold uppercase tracking-wider text-mute">Finished deep traces · open instantly</p>
+              <p className="text-[11px] font-semibold uppercase tracking-wider text-mute">Finished deep traces · open instantly <a href="/showcase" className="ml-1 normal-case tracking-normal text-blue underline">see them all</a></p>
               <div className="mt-1.5 flex flex-wrap gap-2">
                 {DEMOS.map((d) => (
                   <a key={d.run} href={`/?q=${encodeURIComponent(d.q)}&run=${d.run}#trace`} className="rounded-full bg-ink px-3 py-1.5 text-xs font-medium text-paper transition hover:-translate-y-0.5">▶ {d.label}</a>

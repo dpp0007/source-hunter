@@ -4,6 +4,23 @@ importScripts("config.js");
 const open = (text) =>
   chrome.windows.create({ url: `${APP}/?q=${encodeURIComponent(text.slice(0, 600))}#trace`, type: "popup", width: 520, height: 800 });
 
+/** A finished TinyResearch run for a known claim: its verdict, origin and "how it changed", ready for the card (free: the run is already paid for). */
+async function deepSummary(id) {
+  try {
+    const r = await fetch(`${APP}/api/research?id=${encodeURIComponent(id)}`, { signal: AbortSignal.timeout(10000) });
+    const j = await r.json();
+    if (j.status !== "COMPLETED" || !j.report) return null;
+    const m = j.report.match(/```json\s*([\s\S]*?)```/);
+    const d = m ? JSON.parse(m[1]) : null;
+    if (!d || !d.summary) return null;
+    return {
+      status: d.claim_status, summary: d.summary,
+      origin: d.origin_found && d.origin ? { title: d.origin.title, url: d.origin.url, date: d.origin.date } : null,
+      changes: (d.changes || []).slice(0, 3), sources: j.progress ? j.progress.sourceCount : null,
+    };
+  } catch { return null; }
+}
+
 /** Fast trace for the inline card: runs the app's /api/trace and keeps just what the card needs. */
 async function quickTrace(text) {
   let r;
@@ -34,8 +51,9 @@ async function quickTrace(text) {
   }
   if (!done) throw new Error("The trace ended without a result.");
   const o = done.sources.find((s) => s.url === done.origin);
+  const deep = done.knownRun ? await deepSummary(done.knownRun) : null;
   return {
-    verdict: done.verdict, confidence: done.confidence, echo: done.echo, checked: done.checked,
+    verdict: done.verdict, confidence: done.confidence, echo: done.echo, checked: done.checked, trail: done.trail || [], deep, ai: !!(done.judge && done.judge.used),
     origin: o ? { title: o.title, url: o.url, date: o.date, host: o.host, passage: o.passage } : null,
   };
 }

@@ -31,6 +31,19 @@
     .btn{all:unset;cursor:pointer;font:600 12px system-ui;padding:7px 12px;border-radius:999px;box-shadow:inset 0 0 0 1px #d9cfba;color:#1b1a17;text-align:center}
     .btn:hover{background:#f6f0e2}.btn.p{background:#1b1a17;color:#fffdf8;box-shadow:none}.btn.p:hover{background:#34322c}
     .foot{margin-top:8px;font-size:10.5px;color:#8a8576}
+    .card{max-height:calc(100vh - 16px);overflow-y:auto}
+    .deep{background:#1b1a17;color:#fffdf8;border-radius:12px;padding:10px 12px;margin-bottom:8px}
+    .deep .k{color:rgba(255,253,248,.6)}
+    .dlab{font:700 21px/1.15 Georgia,serif;margin-top:3px}
+    .dsum{font-size:12.5px;margin-top:5px;color:rgba(255,253,248,.85);display:-webkit-box;-webkit-line-clamp:5;-webkit-box-orient:vertical;overflow:hidden}
+    .dorig{margin-top:7px;font-size:12px;color:rgba(255,253,248,.7)}.dorig a{color:#ffe066;font-weight:600;text-decoration:none}.dorig a:hover{text-decoration:underline}
+    .dch{margin-top:7px;font-size:11.5px;color:#ffc9c9}.dch div{margin-top:2px}
+    .trail{margin-top:10px}.step{display:flex;gap:8px;margin-top:8px}
+    .dot{flex:none;width:9px;height:9px;border-radius:50%;background:#d9cfba;margin-top:5px}.dot.o{background:#1f8a4c}
+    .sb{min-width:0}.sh{font-size:11px;color:#6f6a5f}.sh b{color:#1b1a17}
+    .sq{font-size:12px;color:#2e2b25;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-top:1px}
+    .rel{display:inline-block;font:700 9.5px system-ui;padding:1px 6px;border-radius:99px;margin:3px 4px 0 0;letter-spacing:.03em}
+    .rel.states{background:#c9f0d6;color:#17693a}.rel.mentions{background:#f1ebdd;color:#6f6a5f}.rel.debunks{background:#ffd6d6;color:#a82323}.rel.flag{background:#ffe3e3;color:#a82323}
     .load{padding:16px 12px 18px;display:flex;flex-direction:column;gap:10px}
     .bar{height:4px;border-radius:99px;background:#eee6d6;overflow:hidden}.bar i{display:block;height:100%;width:40%;background:#2f5bff;border-radius:99px;animation:sl 1.3s ease-in-out infinite}
     @keyframes sl{0%{margin-left:-40%}100%{margin-left:100%}}
@@ -53,6 +66,7 @@
 
   const h = (tag, cls, text) => { const n = document.createElement(tag); if (cls) n.className = cls; if (text !== undefined) n.textContent = text; return n; }; // textContent only: page text is untrusted
   const safeUrl = (u) => { try { const x = new URL(u); return /^https?:$/.test(x.protocol) ? x.href : ""; } catch { return ""; } };
+  const DEEP = { supported: "Supported", refuted: "Refuted", misquoted: "Misquoted", unverifiable: "Can't be verified" };
   const TONE = { error: "warn", supported: "good", verbatim: "good", match: "good", disputed: "bad", altered: "bad", rounded: "warn", unclear: "warn", paraphrase: "mute", none: "mute" };
 
   // Clipboard API first; a hidden textarea + execCommand when the page's permissions policy blocks it
@@ -114,7 +128,27 @@
       return;
     }
     const v = res.verdict, tone = TONE[v.kind] || "mute";
+    // a finished TinyResearch investigation exists for this claim: show it first (it is the deepest answer)
+    if (res.deep) {
+      const dp = res.deep, box = h("div", "deep");
+      box.appendChild(h("div", "k", "✓ Verified by TinyResearch" + (dp.sources ? ` · ${dp.sources} sources read` : "")));
+      box.appendChild(h("div", "dlab", DEEP[dp.status] || "Can't be verified"));
+      box.appendChild(h("div", "dsum", dp.summary));
+      if (dp.origin && dp.origin.title) {
+        const o2 = h("div", "dorig"), u2 = safeUrl(dp.origin.url), a2 = h("a", "", dp.origin.title);
+        if (u2) { a2.href = u2; a2.target = "_blank"; a2.rel = "noreferrer noopener"; }
+        o2.append(h("span", "", "Origin" + (dp.origin.date ? ` (${dp.origin.date}): ` : ": ")), a2);
+        box.appendChild(o2);
+      }
+      if (dp.changes && dp.changes.length) {
+        const ch = h("div", "dch");
+        dp.changes.slice(0, 2).forEach((c) => ch.appendChild(h("div", "", "⚑ " + c)));
+        box.appendChild(ch);
+      }
+      body.appendChild(box);
+    }
     const verdict = h("div", `verdict ${tone}`);
+    if (res.deep) verdict.appendChild(h("div", "k", "Fast pass · what the pages say today"));
     verdict.append(h("div", "lab", v.title), h("div", "det", v.detail));
     body.appendChild(verdict);
 
@@ -132,6 +166,21 @@
     if (v.kind === "error") {
       const again = h("button", "btn p", "Try again"); again.style.marginTop = "10px"; again.onclick = () => showCard(rect, text);
       body.appendChild(again);
+    }
+    if (res.trail && res.trail.length > 1) {
+      const tr = h("div", "trail");
+      tr.appendChild(h("div", "k", "Trail · oldest first"));
+      const REL = { states: "states it", mentions: "mentions it", debunks: "debunks it" };
+      res.trail.forEach((st) => {
+        const row = h("div", "step"), sb = h("div", "sb"), sh = h("div", "sh");
+        sh.append(h("b", "", st.date || "undated"), h("span", "", ` · ${st.host}${st.primary ? " · primary" : ""}${st.isOrigin ? " · earliest" : ""}`));
+        sb.append(sh, h("div", "sq", `“${st.wording}”`));
+        if (st.relation && REL[st.relation]) sb.appendChild(h("span", `rel ${st.relation}`, REL[st.relation]));
+        (st.flags || []).forEach((f) => sb.appendChild(h("span", "rel flag", "⚑ " + f)));
+        row.append(h("i", st.isOrigin ? "dot o" : "dot"), sb);
+        tr.appendChild(row);
+      });
+      body.appendChild(tr);
     }
     const meta = h("div", "meta");
     if (res.confidence) {

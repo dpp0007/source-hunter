@@ -71,3 +71,12 @@ assert.equal(distillClaim("A new survey found that 73% of workers report burnout
 assert.equal(distillClaim("Sugar makes children hyperactive."), "Sugar makes children hyperactive.");
 assert.equal(distillClaim("It is widely believed that we only use 10% of our brains."), "We only use 10% of our brains.");
 console.log("distill ok");
+import { loosePassage } from "../lib/analyze";
+const hbs = "Harvard's Shikhar Ghosh explains. If failure refers to failing to see the projected return on investment, then the failure rate is 70 to 80 percent. And if failure is defined as declaring a projection and then falling short of meeting it, then the failure rate is a whopping 90 to 95 percent. Founders learn.";
+const lp = loosePassage(hbs, "95% of startups fail.");
+assert.ok(lp && lp.sentence.includes("90 to 95 percent"), JSON.stringify(lp));
+assert.equal(loosePassage("The weather in Lisbon was lovely and mild during the whole spring season this year.", "95% of startups fail."), null);
+console.log("loose ok");
+const ab = bestPassage("A senior lecturer says it. More than 95% of start-ups fail, based on Mr. Ghosh, a senior lecturer at Harvard Business School, who studied them.", "95% of startups fail.");
+assert.ok(ab && ab.sentence.includes("Ghosh"), JSON.stringify(ab));
+console.log("abbrev ok");

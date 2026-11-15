@@ -1,5 +1,6 @@
 import { startResearch, getResearch } from "@/lib/tinyfish";
 import { norm } from "@/lib/analyze";
+import { knownRun } from "@/lib/known";
 import { rateLimit, dailyBudget, dailyUsed } from "@/lib/guard";
 export const runtime = "nodejs";
 
@@ -8,6 +9,8 @@ const err = (e: unknown) => Response.json({ error: (e as Error).message }, { sta
 // Every run costs credits (about $2), so the same claim reuses a recent run and a daily cap applies to the public site.
 const cache = new Map<string, { id: string; at: number }>();
 const TTL = 24 * 3600e3;
+// a COMPLETED run never changes: keep its payload so opening a finished result costs no upstream call
+const done = new Map<string, unknown>();
 const MAX_DAILY = Number(process.env.RESEARCH_DAILY_MAX ?? 8);
 
 // TinyResearch is asked for a readable report AND a machine-readable chain, so the UI can verify every step live.
@@ -25,6 +28,8 @@ export async function POST(req: Request) {
   const { claim } = await req.json().catch(() => ({ claim: "" }));
   const text = String(claim ?? "").trim();
   if (text.length < 12) return Response.json({ error: "claim too short" }, { status: 400 });
+  const kr = knownRun(text);
+  if (kr) return Response.json({ id: kr, cached: true, known: true }); // already investigated: free
   const key = norm(text);
   const hit = cache.get(key);
   if (hit && Date.now() - hit.at < TTL) return Response.json({ id: hit.id, cached: true });
@@ -40,9 +45,10 @@ export async function POST(req: Request) {
 export async function GET(req: Request) {
   const id = new URL(req.url).searchParams.get("id");
   if (!id) return Response.json({ error: "missing id" }, { status: 400 });
+  if (done.has(id)) return Response.json(done.get(id));
   try {
     const r = await getResearch(id);
-    return Response.json({
+    const payload = {
       status: r.status, report: r.deep_result?.result ?? null, citations: r.deep_result?.citations ?? [], error: r.error,
       // live progress while it works: how many rounds, which sources it has read, what it is asking next
       progress: {
@@ -51,6 +57,8 @@ export async function GET(req: Request) {
         sourceCount: (r.evidence ?? []).length,
         questions: ((r.research_plan?.subquestions ?? []) as { question: string }[]).slice(0, 4).map((q) => q.question),
       },
-    });
+    };
+    if (r.status === "COMPLETED") { done.set(id, payload); if (done.size > 100) done.delete(done.keys().next().value!); }
+    return Response.json(payload);
   } catch (e) { return err(e); }
 }
