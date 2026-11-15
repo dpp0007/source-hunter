@@ -41,7 +41,7 @@ Highlight a number, claim or quote on any page and see where it really came from
 
 ## Cost control (built for a small budget)
 
-- **Haiku:** one batched call per trace, 8 short excerpts, no thinking, tiny output, cached 6h, capped per day. About **1,900 input + 500 output tokens ≈ $0.0005 per trace** (2,000 traces per dollar).
+- **Haiku:** one batched call per trace, 8 short excerpts, no thinking, tiny output, cached 6h, capped per day. About **2,000 to 3,500 input + 500 output tokens ≈ $0.0005 per trace** (2,000 traces per dollar).
 - **TinyResearch (~$2/run):** a button on the public site, not automatic; the same claim reuses a run; 8 runs/day cap; three pre-computed demo runs open for free.
 - **Agent:** opt-in, 2 pages max per click, daily cap.
 - **Abuse:** per-visitor rate limits on every route (deployed site); traces cached 6h.
@@ -52,16 +52,16 @@ Highlight a number, claim or quote on any page and see where it really came from
 
 | | Rule-based only | With Claude Haiku |
 |---|---|---|
-| **Verdict accuracy** (20 claims) | 18/20 = 90% | **19/20 = 95%** |
+| **Verdict accuracy** (20 claims) | 19/20 = 95% | **20/20 = 100%** |
 | False alarms on **true** claims (4) | 0/4 | **0/4** |
-| High-confidence answers correct | n/a | **5/5** |
-| Cost | $0 | **$0.0066 for all 20 traces** ($0.00033 each) |
-| Average time per trace | | 26 s |
+| High-confidence answers correct | n/a | **4/4** |
+| Cost | $0 | **$0.0093 for all 20 traces** ($0.00047 each, including the upstream walk) |
+| Average time per trace | | 28 s (slowest 44 s) |
 
 The set: 11 myths ("10% of the brain", "Great Wall from space", "bats are blind"…), 3 misattributed quotes (Einstein "insanity", Marie Antoinette "let them eat cake", Gandhi "be the change"), 4 true claims ("Earth is 4.5 billion years old", "water boils at 100 °C"…) to catch false alarms, and 2 murky statistics ("95% of startups fail", "10,000 steps a day") where "supported as stated" would be wrong.
 
-- **The one miss** was the Gandhi quote: that run returned nothing usable (a transient network error plus search variance). Re-run on its own it is judged *Misattributed* correctly. The table above keeps the original measured run.
-- **Haiku's gain** (+5 points) is mostly on quotes and true claims, where word-counting says "origin unclear" and reading the page says *supported* or *misattributed*.
+- An earlier run of the same set scored 19/20: the one miss was the Gandhi quote, which hit a network error and search variance. It is correct in the latest run. Live search results change, so expect a point or so of run-to-run variation.
+- **Haiku's gain** (+5 points over word-counting alone in the first run) is mostly on quotes and true claims, where word-counting says "origin unclear" and reading the page says *supported* or *misattributed*.
 - It is a 20-claim set, mostly well-known myths. Treat the percentages as a sanity check, not a benchmark; the script is in the repo so you can add your own claims.
 
 ## Run it yourself
