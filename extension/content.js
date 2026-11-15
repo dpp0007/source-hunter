@@ -134,11 +134,12 @@
 
     let p;
     try { p = chrome.runtime.sendMessage({ quick: text }); } catch { p = Promise.resolve({ ok: false, error: "Source Hunter was updated. Reload this page and try again." }); }
-    Promise.resolve(p).then((res) => render(card, rect, text, res || { ok: false, error: "No response from the extension." }));
+    const mine = card; // this card, captured now: by the time the answer arrives the user may have closed it or started another trace
+    Promise.resolve(p).then((res) => render(mine, rect, text, res || { ok: false, error: "No response from the extension." })).catch((e) => console.warn("[Source Hunter] could not render the result:", e));
   }
 
   function render(mine, rect, text, res) {
-    if (card !== mine) return; // closed or replaced meanwhile
+    if (!mine || card !== mine) return; // closed or replaced while the trace was running: drop the answer silently
     clearInterval(hintTimer);
     mine.querySelector(".load")?.remove();
     const body = h("div", "body");
