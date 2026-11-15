@@ -2,7 +2,8 @@
 
 Highlight a number, claim or quote on any page and see where it really came from. Built on four TinyFish products, with Claude Haiku as a cheap judge.
 
-**Live app + extension download:** see the deployment URL in the repo description. The extension is a `.zip` served by the app itself (`/source-hunter-extension.zip`), so nobody needs repo access to try it.
+**Live app:** https://source-hunter.vercel.app
+**Extension (.zip):** https://source-hunter.vercel.app/source-hunter-extension.zip (served by the app, so no repo access is needed to try it)
 
 ## Try it in 60 seconds (judges)
 
