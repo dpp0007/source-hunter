@@ -53,7 +53,7 @@
 
   const h = (tag, cls, text) => { const n = document.createElement(tag); if (cls) n.className = cls; if (text !== undefined) n.textContent = text; return n; }; // textContent only: page text is untrusted
   const safeUrl = (u) => { try { const x = new URL(u); return /^https?:$/.test(x.protocol) ? x.href : ""; } catch { return ""; } };
-  const TONE = { verbatim: "good", match: "good", disputed: "bad", altered: "bad", rounded: "warn", unclear: "warn", paraphrase: "mute", none: "mute" };
+  const TONE = { error: "warn", supported: "good", verbatim: "good", match: "good", disputed: "bad", altered: "bad", rounded: "warn", unclear: "warn", paraphrase: "mute", none: "mute" };
 
   // Clipboard API first; a hidden textarea + execCommand when the page's permissions policy blocks it
   const copyText = (t) => navigator.clipboard.writeText(t).catch(() => {
@@ -128,6 +128,10 @@
       box.appendChild(a);
       box.appendChild(h("div", "m", [o.date || "undated", o.host].filter(Boolean).join(" · ")));
       body.appendChild(box);
+    }
+    if (v.kind === "error") {
+      const again = h("button", "btn p", "Try again"); again.style.marginTop = "10px"; again.onclick = () => showCard(rect, text);
+      body.appendChild(again);
     }
     const meta = h("div", "meta");
     if (res.confidence) {

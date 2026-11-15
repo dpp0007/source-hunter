@@ -119,6 +119,8 @@ export async function POST(req: Request) {
         const seen = new Set<string>();
         const dates = new Map<string, string>();
         let checked = 0;
+        let fetchErr = "";
+        let noOrigin = false; // set when nothing could be read
 
         send({ type: "step", msg: claim !== asked ? `Tracing the core claim: “${claim.slice(0, 90)}”` : "TinyFish Search: looking for pages that make this claim" });
         const short = claim.split(/\s+/).slice(0, 14).join(" ");
@@ -152,7 +154,9 @@ export async function POST(req: Request) {
           send({ type: "step", msg: hop ? `Hop ${hop}: following ${queue.length} cited link(s) upstream` : `TinyFish Fetch: reading ${queue.length} pages` });
           const from = new Map(queue.map((q) => [q.url, q.from]));
           const viaOf = new Map(queue.map((q) => [q.url, q.via]));
-          const pages = await fetchPages(queue.map((q) => q.url)).catch((e) => { send({ type: "step", msg: `fetch failed: ${e.message}` }); return []; });
+          const read = () => fetchPages(queue.map((q) => q.url)).catch((e) => { fetchErr = e.message; send({ type: "step", msg: `fetch failed: ${e.message.slice(0, 100)}` }); return [] as Awaited<ReturnType<typeof fetchPages>>; });
+          let pages = body.debugFailFetch && !process.env.VERCEL ? [] : await read(); // debugFailFetch: local-only switch to test the failure path
+          if (hop === 0 && pages.length === 0 && !body.debugFailFetch) { send({ type: "step", msg: "No pages came back; retrying once" }); await new Promise((ok) => setTimeout(ok, 1500)); pages = await read(); }
           queue = [];
           for (const p of pages) {
             checked++;
@@ -227,15 +231,22 @@ export async function POST(req: Request) {
           } else judgeInfo = { used: false, reason: "AI judge unavailable or over its daily cap; used the rule-based judgement" };
         }
 
+        // Nothing could be READ is a temporary failure, not a finding: never report it as "no original source found"
+        if (checked === 0 && hits.length > 0) {
+          noOrigin = true;
+          verdict = { kind: "error", title: "Couldn't read any pages", detail: `TinyFish found ${hits.length} candidate pages, but none could be read just now${fetchErr ? ` (${fetchErr.slice(0, 80)})` : ""}. This is a temporary problem, not a finding about the claim. Please try again in a moment.` };
+          confidence = { level: "none", why: "no page could be read" };
+        }
+
         // Drift Diff: how every other repeat's wording differs from the origin's
-        if (origin) for (const s of sources) if (s !== origin) { const d = wordDiff(origin.passage, s.passage); s.drift = d.similarity; s.diff = d.toks; s.flags = driftFlags(d.toks); }
+        if (origin && !noOrigin) for (const s of sources) if (s !== origin) { const d = wordDiff(origin.passage, s.passage); s.drift = d.similarity; s.diff = d.toks; s.flags = driftFlags(d.toks); }
         const echo = { copies: sources.length, primaries: sources.filter((s) => s.primary).length, hosts: new Set(sources.map((s) => s.host)).size };
         const pub = sources.map(({ ctx: _c, ...s }) => { void _c; return s; });
         const done = {
-          type: "done", verdict, origin: origin?.url, sources: pub, checked, echo, confidence, judge: judgeInfo, ms: Date.now() - T0,
+          type: "done", verdict, origin: noOrigin ? undefined : origin?.url, sources: pub, checked, echo, confidence, judge: judgeInfo, ms: Date.now() - T0,
           baseline: judgeInfo.used ? { verdict: baseline.verdict, origin: baseline.origin?.url, confidence: baseline.confidence } : undefined,
         };
-        cache.set(ckey, { at: Date.now(), done });
+        if (verdict.kind !== "error") cache.set(ckey, { at: Date.now(), done }); // never cache a temporary failure
         if (cache.size > 200) cache.delete(cache.keys().next().value!);
         send(done);
       } catch (e) {

@@ -47,7 +47,7 @@ const BADGE: Record<string, string> = {
 };
 const LABEL: Record<string, string> = { verbatim: "exact wording", match: "figures match", paraphrase: "reworded", rounded: "rounded / drifted", altered: "figures changed", related: "loosely related" };
 const CLAIM_LABEL: Record<string, [string, Tone]> = { supported: ["Supported", "good"], refuted: ["Refuted", "bad"], misquoted: ["Misquoted", "warn"], unverifiable: ["Can't be verified", "mute"] };
-const FAST_TONE: Record<string, Tone> = { supported: "good", verbatim: "good", match: "good", disputed: "bad", altered: "bad", rounded: "warn", unclear: "warn", paraphrase: "mute", none: "mute" };
+const FAST_TONE: Record<string, Tone> = { error: "warn", supported: "good", verbatim: "good", match: "good", disputed: "bad", altered: "bad", rounded: "warn", unclear: "warn", paraphrase: "mute", none: "mute" };
 const REL: Record<string, [string, string]> = {
   states: ["states the claim", "bg-[#c9f0d6] text-good"], mentions: ["mentions it", "bg-line text-mute"],
   debunks: ["debunks it", "bg-[#ffd6d6] text-bad"], unrelated: ["unrelated", "bg-line text-mute"],
