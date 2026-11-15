@@ -5,6 +5,7 @@ import { judge, judgeEnabled, JUDGE_MODEL, type JudgeInput, type Judgement, type
 import { rateLimit } from "@/lib/guard";
 import { findCitation } from "@/lib/walk";
 import { knownRun } from "@/lib/known";
+import { findResearchRun } from "@/lib/tinyfish";
 import { loosePassage, bestPassage, compare, findDate, normDate, isPrimary, isDisputed, isTight, links, attributions, strip, norm, type Match } from "@/lib/analyze";
 
 export const maxDuration = 60; // fits Vercel Hobby; the trace budgets its own time below
@@ -132,9 +133,11 @@ export async function POST(req: Request) {
         const ckey = `${norm(claim)}|${useJudge}`, hit = cache.get(ckey);
         if (!fresh && hit && Date.now() - hit.at < TTL) {
           send({ type: "step", msg: "Recent result for this claim (instant)" });
-          send({ ...hit.done, cached: true });
+          send({ ...hit.done, knownRun: knownRun(asked, claim) ?? (await findResearchRun(asked)) ?? (await findResearchRun(claim)) ?? undefined, cached: true });
           c.close(); return;
         }
+        // start looking for an existing deep run right away; it is awaited only when the answer is built
+        const existingRun = findResearchRun(asked).then((id) => id ?? (claim !== asked ? findResearchRun(claim) : null));
         const sources: Source[] = [];
         const seen = new Set<string>();
         const dates = new Map<string, string>();
@@ -320,7 +323,7 @@ export async function POST(req: Request) {
         const pub = sources.map(({ ctx: _c, ...s }) => { void _c; return s; });
         const trail = origin && !noOrigin ? buildTrail(sources, origin) : [];
         const done = {
-          type: "done", verdict, origin: noOrigin ? undefined : origin?.url, sources: pub, trail, knownRun: knownRun(asked, claim), checked, echo, confidence, judge: judgeInfo, ms: Date.now() - T0,
+          type: "done", verdict, origin: noOrigin ? undefined : origin?.url, sources: pub, trail, knownRun: knownRun(asked, claim) ?? (await existingRun) ?? undefined, checked, echo, confidence, judge: judgeInfo, ms: Date.now() - T0,
           baseline: judgeInfo.used ? { verdict: baseline.verdict, origin: baseline.origin?.url, confidence: baseline.confidence } : undefined,
         };
         if (verdict.kind !== "error") cache.set(ckey, { at: Date.now(), done }); // never cache a temporary failure

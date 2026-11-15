@@ -313,7 +313,7 @@ export default function Tracer({ compact = false }: { compact?: boolean }) {
       {compact ? (
         <div className="mb-3 flex items-center justify-between">
           <p className="flex items-center gap-2 font-display text-2xl"><Logo size={26} />Source Hunter</p>
-          <a href="/" target="_blank" className="text-xs text-mute hover:underline">Open full app ↗</a>
+          <a href={ran ? `/?q=${encodeURIComponent(ran)}${deep.id ? `&run=${deep.id}` : ""}&full=1#trace` : "/"} target="_blank" className="text-xs text-mute hover:underline" title="Opens the full app with this claim and its deep research">Open full app ↗</a>
         </div>
       ) : (
         <>

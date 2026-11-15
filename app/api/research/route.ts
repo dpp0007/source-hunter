@@ -1,4 +1,4 @@
-import { startResearch, getResearch } from "@/lib/tinyfish";
+import { startResearch, getResearch, findResearchRun } from "@/lib/tinyfish";
 import { norm } from "@/lib/analyze";
 import { knownRun } from "@/lib/known";
 import { rateLimit, dailyBudget, dailyUsed } from "@/lib/guard";
@@ -33,6 +33,9 @@ export async function POST(req: Request) {
   const key = norm(text);
   const hit = cache.get(key);
   if (hit && Date.now() - hit.at < TTL) return Response.json({ id: hit.id, cached: true });
+  // already investigated (by anyone, in any window or after a restart)? reuse it: saved by TinyFish, free, and no duplicate $2 run
+  const existing = await findResearchRun(text);
+  if (existing) { cache.set(key, { id: existing, at: Date.now() }); return Response.json({ id: existing, cached: true, existing: true }); }
   if (!dailyBudget("research", MAX_DAILY))
     return Response.json({ error: `Today's deep-verification budget is used up (${dailyUsed("research")} runs). The fast result above is still valid; try the pre-computed demos or come back tomorrow.`, budget: true }, { status: 429 });
   try {

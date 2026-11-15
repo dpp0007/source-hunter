@@ -79,3 +79,31 @@ export async function runAgent(url: string, goal: string, output_schema: object,
   if (!r.ok || j.status !== "COMPLETED") throw new Error(`TinyFish Agent ${r.status}: ${j?.error?.message ?? j.status ?? "failed"}`);
   return (j.result as Record<string, unknown>) ?? null;
 }
+
+const runCache = new Map<string, { at: number; id: string | null }>();
+
+/**
+ * Has this claim already been investigated? TinyFish keeps every run on its side and can list runs by query text, so the
+ * claim -> run link survives other windows, other origins (localhost vs the live site), other devices and server restarts.
+ * Returns a COMPLETED run if there is one, otherwise one still running.
+ */
+export async function findResearchRun(claim: string): Promise<string | null> {
+  const want = claim.toLowerCase().replace(/\s+/g, " ").trim();
+  if (want.length < 12) return null;
+  const hit = runCache.get(want);
+  if (hit && Date.now() - hit.at < 90_000) return hit.id;
+  try {
+    const u = new URL("https://agent.tinyfish.ai/v1/research-run");
+    u.searchParams.set("query", claim.trim().slice(0, 120));
+    u.searchParams.set("limit", "10");
+    u.searchParams.set("sort_direction", "desc");
+    const r = await fetch(u, { headers: H(), signal: AbortSignal.timeout(5000) });
+    if (!r.ok) return null;
+    const j = await r.json();
+    const runs = ((j.data ?? []) as { research_run_id: string; status: string; query?: string }[])
+      .filter((x) => ["COMPLETED", "RUNNING", "QUEUED"].includes(x.status) && (x.query ?? "").toLowerCase().replace(/\s+/g, " ").includes(want));
+    const id = (runs.find((x) => x.status === "COMPLETED") ?? runs[0])?.research_run_id ?? null;
+    runCache.set(want, { at: Date.now(), id });
+    return id;
+  } catch { return null; }
+}

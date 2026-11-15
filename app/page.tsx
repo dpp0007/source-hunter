@@ -6,7 +6,7 @@ type SP = Promise<Record<string, string | string[] | undefined>>;
 export default async function Page({ searchParams }: { searchParams: SP }) {
   const sp = await searchParams;
   // opened from the extension (a claim in the URL): skip the landing page and go straight to the answer
-  const compact = Boolean(sp.q || sp.run);
+  const compact = Boolean((sp.q || sp.run) && !sp.full); // ?full=1 opens the whole app (landing page included) with the claim and run kept
   return (
     <main>
       {!compact && <Hero />}
