@@ -81,29 +81,39 @@ export async function runAgent(url: string, goal: string, output_schema: object,
 }
 
 const runCache = new Map<string, { at: number; id: string | null }>();
+// letters and digits only: immune to line breaks, curly vs straight quotes and spacing
+const alnum = (t: string) => t.toLowerCase().replace(/[^a-z0-9]+/g, "");
 
 /**
  * Has this claim already been investigated? TinyFish keeps every run on its side and can list runs by query text, so the
  * claim -> run link survives other windows, other origins (localhost vs the live site), other devices and server restarts.
  * Returns a COMPLETED run if there is one, otherwise one still running.
+ *
+ * TinyFish matches the list query as an exact substring, and a saved claim may contain line breaks the new text lacks
+ * (a pasted paragraph), so the search uses a short single-line snippet and the real comparison happens here.
  */
 export async function findResearchRun(claim: string): Promise<string | null> {
-  const want = claim.toLowerCase().replace(/\s+/g, " ").trim();
-  if (want.length < 12) return null;
-  const hit = runCache.get(want);
+  const key = alnum(claim);
+  if (key.length < 12) return null;
+  const hit = runCache.get(key);
   if (hit && Date.now() - hit.at < 90_000) return hit.id;
+  // snippet: the first words, stopping at the end of the first sentence so it never spans a line break
+  const words: string[] = [];
+  for (const w of claim.trim().split(/\s+/)) { words.push(w); if (words.length >= 5 || /[.!?]$/.test(w)) break; }
+  const snippet = words.join(" ");
   try {
     const u = new URL("https://agent.tinyfish.ai/v1/research-run");
-    u.searchParams.set("query", claim.trim().slice(0, 120));
-    u.searchParams.set("limit", "10");
+    u.searchParams.set("query", snippet);
+    u.searchParams.set("limit", "25");
     u.searchParams.set("sort_direction", "desc");
     const r = await fetch(u, { headers: H(), signal: AbortSignal.timeout(5000) });
     if (!r.ok) return null;
     const j = await r.json();
+    const probe = key.slice(0, 160);
     const runs = ((j.data ?? []) as { research_run_id: string; status: string; query?: string }[])
-      .filter((x) => ["COMPLETED", "RUNNING", "QUEUED"].includes(x.status) && (x.query ?? "").toLowerCase().replace(/\s+/g, " ").includes(want));
+      .filter((x) => ["COMPLETED", "RUNNING", "QUEUED"].includes(x.status) && alnum(x.query ?? "").includes(probe));
     const id = (runs.find((x) => x.status === "COMPLETED") ?? runs[0])?.research_run_id ?? null;
-    runCache.set(want, { at: Date.now(), id });
+    runCache.set(key, { at: Date.now(), id });
     return id;
   } catch { return null; }
 }
