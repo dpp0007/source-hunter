@@ -12,7 +12,11 @@ async function quickTrace(text) {
   } catch {
     throw new Error(`Can't reach the Source Hunter app at ${APP}. Is it running (npm run dev)?`);
   }
-  if (!r.ok || !r.body) throw new Error(`Source Hunter app returned ${r.status}`);
+  if (r.status === 429) throw new Error("Too many traces in a short time. Wait a minute and try again.");
+  if (!r.ok || !r.body) {
+    const local = /localhost|127\.0\.0\.1/.test(APP);
+    throw new Error(`The Source Hunter app returned an error (${r.status}). ${local ? "You are using the local app: restart it with npm run dev." : "Please try again in a moment."}`);
+  }
   const reader = r.body.getReader(), dec = new TextDecoder();
   let buf = "", done = null;
   for (;;) {
